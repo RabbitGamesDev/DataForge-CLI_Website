@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planes — DataForge CLI</title>
+<meta name="description" content="Compara los planes Free, Pro y Teams de DataForge CLI. El núcleo siempre será Open Source; Pro y Teams desbloquean flujos para uso profesional y equipos.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .pricing-switch{ display:flex; align-items:center; justify-content:center; gap:12px; margin:32px 0 48px; font-family:var(--font-mono); font-size:13px; color:var(--text-muted); }
+  .switch{ position:relative; width:44px; height:24px; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .track{ position:absolute; inset:0; background:var(--border-strong); border-radius:100px; cursor:pointer; transition:background 0.2s ease; }
+  .switch .track::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--text); border-radius:50%; transition:transform 0.2s ease; }
+  .switch input:checked + .track{ background:var(--green-line); }
+  .switch input:checked + .track::before{ transform:translateX(20px); background:var(--green); }
+  .save-badge{ font-size:11px; color:var(--green); background:var(--green-dim); border:1px solid var(--green-line); padding:2px 8px; border-radius:100px; }
+
+  .plan-card{ position:relative; display:flex; flex-direction:column; }
+  .plan-card.featured{ border-color:var(--green-line); box-shadow:0 0 0 1px var(--green-line), 0 30px 60px -30px rgba(124,255,0,0.15); }
+  .plan-card .badge-pop{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--green); color:#04220a; font-family:var(--font-mono); font-size:11px; font-weight:700;
+    padding:5px 14px; border-radius:100px; letter-spacing:0.04em;
+  }
+  .plan-price{ font-family:var(--font-display); font-size:40px; margin:18px 0 4px; }
+  .plan-price small{ font-size:14px; color:var(--text-muted); font-family:var(--font-ui); font-weight:400; }
+  .plan-list{ list-style:none; margin:22px 0 26px; padding:0; display:flex; flex-direction:column; gap:11px; flex:1; }
+  .plan-list li{ display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-muted); }
+  .plan-list li svg{ flex-shrink:0; margin-top:2px; color:var(--green); }
+
+  .compare{ width:100%; border-collapse:collapse; margin-top:20px; font-size:14px; }
+  .compare th, .compare td{ padding:14px 16px; border-bottom:1px solid var(--border); text-align:center; }
+  .compare th{ font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); font-weight:500; }
+  .compare td:first-child, .compare th:first-child{ text-align:left; color:var(--text); }
+  .compare td:first-child{ color:var(--text-muted); }
+  .compare th.featured-col{ color:var(--green); }
+  .compare td.featured-col{ background:var(--green-dim); }
+  .compare .yes{ color:var(--green); }
+  .compare .no{ color:var(--text-dim); }
+  .compare-wrap{ overflow-x:auto; border:1px solid var(--border); border-radius:var(--r-md); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="plans.html">Planes</a></li>
+      <li><a href="installation.html">Instalación</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="#pricing">Obtener PRO</a>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero" style="text-align:center;">
+  <div class="circuit-bg"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="dot"></span>Planes</span>
+    <h1 class="reveal in" style="margin:16px auto 0;">Un plan para cada etapa.</h1>
+    <p class="reveal in" style="margin:14px auto 0;">El núcleo de DataForge CLI seguirá siendo Open Source para siempre. PRO y Teams existen para quienes lo usan todos los días.</p>
+  </div>
+</header>
+
+<section id="pricing" style="padding-top:0;">
+  <div class="wrap">
+
+    <div class="pricing-switch">
+      <span>Mensual</span>
+      <label class="switch">
+        <input type="checkbox" class="pricing-toggle" aria-label="Alternar entre precio mensual y anual">
+        <span class="track"></span>
+      </label>
+      <span>Anual <span class="save-badge">Ahorra 20%</span></span>
+    </div>
+
+    <div class="grid grid-3">
+
+      <!-- FREE -->
+      <div class="card plan-card reveal">
+        <span class="tag free">Free</span>
+        <div class="plan-price">$0</div>
+        <p style="color:var(--text-muted); font-size:13.5px;">Para siempre, sin tarjeta.</p>
+        <ul class="plan-list">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>scan, explain, map, onboard</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Reportes locales en Markdown</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Uso ilimitado, 1 proyecto a la vez</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Soporte comunitario (GitHub Issues)</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="installation.html">Instalar gratis</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="card plan-card featured reveal">
+        <span class="badge-pop">Más popular</span>
+        <span class="tag pro">Pro</span>
+        <div class="plan-price">
+          <span data-price-monthly="$9" data-price-annual="$7.20">$9</span><small class="price-period">/mes</small>
+        </div>
+        <p style="color:var(--text-muted); font-size:13.5px;">Para uso profesional diario.</p>
+        <ul class="plan-list">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo de Free</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Comando <code>ask</code> — chat consultor</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Historial de reportes</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Prioridad de modelo</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Soporte prioritario</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="mailto:hola@rgslabs.dev?subject=Quiero%20DataForge%20PRO" title="El checkout automático llega en la próxima fase del sitio">Obtener PRO</a>
+      </div>
+
+      <!-- TEAMS -->
+      <div class="card plan-card reveal">
+        <span class="tag teams">Teams</span>
+        <div class="plan-price">
+          <span data-price-monthly="$29" data-price-annual="$23.20">$29</span><small class="price-period">/usuario/mes</small>
+        </div>
+        <p style="color:var(--text-muted); font-size:13.5px;">Mínimo 3 asientos.</p>
+        <ul class="plan-list">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo de Pro</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Licencias centralizadas</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Facturación consolidada</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5 6.2 12 13 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Panel de administración de equipo</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="mailto:hola@rgslabs.dev?subject=DataForge%20Teams">Hablar con ventas</a>
+      </div>
+
+    </div>
+
+    <p style="text-align:center; color:var(--text-dim); font-size:13px; margin-top:22px; font-family:var(--font-mono);">
+      El checkout automático (Lemon Squeezy) se activa en la próxima fase del sitio. Por ahora, PRO y Teams se activan por contacto directo.
+    </p>
+
+  </div>
+</section>
+
+<!-- ============ COMPARISON TABLE ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Comparación completa</h2>
+      <p>Todo lo que incluye cada plan, sin letra pequeña.</p>
+    </div>
+
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th class="featured-col">Pro</th>
+            <th>Teams</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>scan / explain / map / onboard</td><td class="yes">✓</td><td class="featured-col yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Reportes locales en Markdown</td><td class="yes">✓</td><td class="featured-col yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Chat consultor (<code>ask</code>)</td><td class="no">—</td><td class="featured-col yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Historial de reportes</td><td class="no">—</td><td class="featured-col yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Prioridad de modelo</td><td class="no">—</td><td class="featured-col yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td>Proyectos simultáneos</td><td>1</td><td class="featured-col">Ilimitados</td><td>Ilimitados</td></tr>
+          <tr><td>Licencias centralizadas</td><td class="no">—</td><td class="featured-col no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Facturación consolidada</td><td class="no">—</td><td class="featured-col no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Panel de administración</td><td class="no">—</td><td class="featured-col no">—</td><td class="yes">✓</td></tr>
+          <tr><td>Soporte</td><td>Comunidad</td><td class="featured-col">Prioritario</td><td>Dedicado</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+        <p>Tu consultor de IA dentro de la terminal. Un proyecto de RGS Labs™.</p>
+      </div>
+      <div class="footer-col"><h4>Producto</h4><ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="plans.html">Planes</a></li>
+        <li><a href="installation.html">Instalación</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Recursos</h4><ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI#readme" target="_blank" rel="noopener">Documentación</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/blob/main/LICENSE" target="_blank" rel="noopener">Licencia Apache 2.0</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RGS Labs™ · DataForge CLI</span>
+      <span>Desarrollado con ♥ en Xalapa, México</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

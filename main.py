@@ -1,0 +1,149 @@
+import sys
+import os
+import webbrowser
+from dataforge.config_manager import init_config, get_config, setup_config
+from dataforge.api_handler import ask_groq
+from dataforge.core import get_all_files, read_file_content, save_report, get_single_file_content
+import license_manager
+
+# Welcome page hosted on GitHub Pages. Because this is a URL and not a local
+# file, the letter, links or design can be updated at any time on GitHub
+# Pages without ever needing to publish a new version of DataForge CLI.
+WELCOME_URL = "https://rabbitgamesdev.github.io/DataForge-CLI/"
+
+def open_welcome_page():
+    """Opens the DataForge CLI welcome letter in the user's default browser."""
+    try:
+        webbrowser.open(WELCOME_URL, new=2)
+    except Exception:
+        # Never block CLI usage if the browser can't be opened
+        # (e.g. headless server, no display available).
+        print(f"👉 Puedes ver la carta de bienvenida aquí: {WELCOME_URL}")
+
+def run_scan(target_path):
+    print(f"🔍 Escaneando: {target_path}...")
+    files = get_all_files(target_path)
+    if not files:
+        print("No se encontraron archivos válidos.")
+        return
+    print(f"✅ Se encontraron {len(files)} archivos.")
+    file_list_str = "\n".join([f"- {f}" for f in files])
+    full_context = "".join([f"\n--- ARCHIVO: {f} ---\n{read_file_content(f)}" for f in files])
+    
+    print("🤖 Consultando a la IA...")
+    respuesta = ask_groq(f"Analiza la estructura y el código de este proyecto:\n{full_context}")
+    report_path = save_report(f"ARCHIVO DE REPORTE - DataForge CLI\nArchivos analizados:\n{file_list_str}\n\n{respuesta}", target_path)
+    print(f"\n✅ Reporte guardado en: {report_path}\n{respuesta}")
+
+def run_explain(file_path):
+    content = get_single_file_content(file_path)
+    if content is None:
+        print("Error: El archivo no existe.")
+        return
+    respuesta = ask_groq(f"Explica detalladamente qué hace este archivo:\n{content}")
+    print(f"\n--- EXPLICACIÓN ---\n{respuesta}")
+
+def run_map(target_path):
+    print(f"🗺️ Generando mapa de dependencias...")
+    files = get_all_files(target_path)
+    file_names = "\n".join([os.path.relpath(f, target_path) for f in files])
+    respuesta = ask_groq(f"Basado en:\n{file_names}\n\nGenera un mapa visual (ASCII) de la arquitectura.")
+    print(f"\n--- MAPA DE ARQUITECTURA ---\n{respuesta}")
+
+def run_chat(target_path):
+    if not license_manager.has_feature("ask"):
+        print("🔒 El modo 'ask' es una función PRO.")
+        print(f"   Consulta los planes en: {WELCOME_URL}plans.html")
+        return
+    print(f"🤖 Iniciando modo Chat Consultor. Analizando archivos...")
+    files = get_all_files(target_path)
+    full_context = "CONTEXTO:\n" + "\n".join([f"\n--- {f} ---\n{read_file_content(f)}" for f in files])
+    system_prompt = "Eres Consultor Senior de DataForge. Prioriza seguridad, legibilidad y escalabilidad. Analiza los módulos específicos antes de dar consejos."
+    history = [{"role": "system", "content": system_prompt}, {"role": "system", "content": full_context}]
+    
+    print("✅ Consultor listo. (Escribe 'salir' para terminar).")
+    while True:
+        user_input = input("\n👤 Tú: ")
+        if user_input.lower() in ["salir", "exit", "quit"]: break
+        history.append({"role": "user", "content": user_input})
+        respuesta = ask_groq(str(history))
+        print(f"🤖 IA: {respuesta}")
+        history.append({"role": "assistant", "content": respuesta})
+
+def run_onboard(target_path):
+    print(f"🚀 Generando onboarding...")
+    files = get_all_files(target_path)
+    full_context = "\n".join([f"--- {f} ---\n{read_file_content(f)}" for f in files])
+    respuesta = ask_groq(f"Actúa como Líder Técnico. Genera un Onboarding: resumen, punto de entrada, archivos críticos y guía.\n{full_context}")
+    report_path = save_report(f"--- ONBOARDING DOCUMENT ---\n{respuesta}", target_path)
+    print(f"✅ Onboarding generado: {report_path}\n\n{respuesta}")
+
+def run_license(code):
+    ok, message, record = license_manager.activate_license(code)
+    if not ok:
+        print(f"❌ {message}")
+        return
+    print(f"✅ {message}")
+    print(f"   Plan: {record['plan'].upper()}")
+    print(f"   Licencia guardada en {license_manager.LICENSE_FILE}")
+
+def run_license_status():
+    record = license_manager.load_license()
+    plan = license_manager.get_plan(record)
+    if plan == "free":
+        print("ℹ️  No hay ninguna licencia PRO/Teams activa. Estás usando el plan Free.")
+        return
+    estado = "activa ✅" if license_manager.is_active(record) else f"{record.get('status')} ⚠️"
+    print(f"📄 Licencia: {record.get('license')}")
+    print(f"   Plan:   {record['plan'].upper()}")
+    print(f"   Estado: {estado}")
+    print(f"   Emitida: {record.get('issued_at')}")
+    print(f"   Expira:  {record.get('expires_at') or 'Sin vencimiento'}")
+
+def main():
+    init_config()
+    if get_config() is None:
+        setup_config()
+        # First-time setup just finished: show the welcome letter.
+        open_welcome_page()
+
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+🚀 DataForge CLI - Asistente de Código con IA
+---------------------------------------------
+Uso: python main.py [comando] [ruta/archivo]
+
+Comandos disponibles:
+  scan    [ruta]      : Analiza proyecto y guarda reporte.
+  explain [archivo]   : Explica un archivo específico.
+  map     [ruta]      : Mapa de arquitectura (ASCII).
+  ask     [ruta]      : Chat interactivo con tu código.
+  onboard [ruta]      : Guía de bienvenida para nuevos devs.
+  welcome              : Abre la carta de bienvenida de DataForge CLI.
+  license <clave>      : Activa una licencia PRO/Teams (DFORGE-PLAN-XXXX-XXXXX).
+  license status       : Muestra el plan y licencia activos.
+        """)
+        return
+
+    command = sys.argv[1]
+    path = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else ".")
+    
+    if command == "scan": run_scan(path)
+    elif command == "explain":
+        if len(sys.argv) > 2: run_explain(path)
+        else: print("Error: Especifica un archivo para 'explain'.")
+    elif command == "map": run_map(path)
+    elif command == "ask": run_chat(path)
+    elif command == "onboard": run_onboard(path)
+    elif command == "welcome": open_welcome_page()
+    elif command == "license":
+        if len(sys.argv) > 2 and sys.argv[2].lower() == "status":
+            run_license_status()
+        elif len(sys.argv) > 2:
+            run_license(sys.argv[2])
+        else:
+            print("Uso: python main.py license <CODIGO>  |  python main.py license status")
+    else: print(f"Comando '{command}' no reconocido. Escribe 'python main.py' para ver ayuda.")
+
+if __name__ == "__main__":
+    main()

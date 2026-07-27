@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features — DataForge CLI</title>
+<meta name="description" content="Todos los comandos de DataForge CLI: FREE, PRO y Teams. Escaneo de proyectos, explicación de código, mapas de arquitectura, chat consultor y onboarding automático.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="plans.html">Planes</a></li>
+      <li><a href="installation.html">Instalación</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="plans.html">Obtener PRO</a>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="dot"></span>Features</span>
+    <h1 class="reveal in">Un comando para cada pregunta que te haces sobre tu código.</h1>
+    <p class="reveal in">Desde un escaneo rápido hasta un consultor que responde en tiempo real, dentro de tu propia terminal.</p>
+  </div>
+</header>
+
+<!-- ============ FREE ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag free">Free</span>
+      <h2 style="margin-top:14px;">El núcleo, siempre abierto</h2>
+      <p>Suficiente para entender, documentar y navegar cualquier proyecto desde el día uno.</p>
+    </div>
+
+    <div class="grid grid-2">
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M9 16A7 7 0 1 0 9 2a7 7 0 0 0 0 14Zm9 2-3.6-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">scan</h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Recorre todo el proyecto, arma el contexto completo y le pide a la IA un reporte técnico: arquitectura, riesgos y sugerencias de mejora. Guarda el resultado en un archivo listo para compartir.</p>
+        <div class="code-block" style="padding:14px 16px; font-size:13px;"><code>dataforge scan .</code></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 3h9l3 3v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 10h6M7 13h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">explain</h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Apunta a un solo archivo y recibe una explicación clara y detallada de qué hace, cómo está estructurado y por qué probablemente se escribió así.</p>
+        <div class="code-block" style="padding:14px 16px; font-size:13px;"><code>dataforge explain payments.py</code></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15V5a2 2 0 0 1 2-2h6l4 4v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 9h4M7 12h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">map</h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Genera un mapa ASCII de la arquitectura del repositorio, ideal para entender cómo se conectan los módulos antes de tocar una sola línea.</p>
+        <div class="code-block" style="padding:14px 16px; font-size:13px;"><code>dataforge map .</code></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2 3 6v6c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">onboard</h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Crea una guía de onboarding automática: resumen del proyecto, punto de entrada, archivos críticos y primeros pasos para cualquier dev nuevo en el equipo.</p>
+        <div class="code-block" style="padding:14px 16px; font-size:13px;"><code>dataforge onboard .</code></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRO ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag pro">Pro</span>
+      <h2 style="margin-top:14px;">Para quien vive en la terminal</h2>
+      <p>Conversación continua con tu propio código y flujos pensados para uso profesional diario.</p>
+    </div>
+
+    <div class="grid grid-2">
+
+      <div class="card reveal" style="border-color:rgba(255,176,32,0.25);">
+        <div class="card-icon" style="background:rgba(255,176,32,0.1); border-color:rgba(255,176,32,0.35); color:var(--amber);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h14v9H8l-3 3v-3H3V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">ask <span class="tag pro" style="margin-left:6px;">PRO</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Modo chat consultor: carga el contexto completo de tu proyecto y sostén una conversación real sobre seguridad, legibilidad y escalabilidad, sin volver a explicar nada.</p>
+        <div class="code-block" style="padding:14px 16px; font-size:13px;"><code>dataforge ask .</code></div>
+      </div>
+
+      <div class="card reveal" style="border-color:rgba(255,176,32,0.25);">
+        <div class="card-icon" style="background:rgba(255,176,32,0.1); border-color:rgba(255,176,32,0.35); color:var(--amber);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Reportes con historial <span class="tag pro" style="margin-left:6px;">PRO</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Cada scan queda versionado, para que puedas comparar la salud del proyecto a lo largo del tiempo, no solo en el momento actual.</p>
+      </div>
+
+      <div class="card reveal" style="border-color:rgba(255,176,32,0.25);">
+        <div class="card-icon" style="background:rgba(255,176,32,0.1); border-color:rgba(255,176,32,0.35); color:var(--amber);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Prioridad de modelo <span class="tag pro" style="margin-left:6px;">PRO</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Respuestas más rápidas y límites más altos al consultar la IA, pensado para sesiones largas de trabajo.</p>
+      </div>
+
+      <div class="card reveal" style="border-color:rgba(255,176,32,0.25);">
+        <div class="card-icon" style="background:rgba(255,176,32,0.1); border-color:rgba(255,176,32,0.35); color:var(--amber);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2 3 6v6c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Soporte prioritario <span class="tag pro" style="margin-left:6px;">PRO</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:16px;">Tus Issues en GitHub se etiquetan y atienden con prioridad frente al flujo del núcleo gratuito.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAMS ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag teams">Teams</span>
+      <h2 style="margin-top:14px;">Para equipos, no solo individuos</h2>
+      <p>Todo lo de PRO, más gestión centralizada de licencias y facturación para el equipo completo.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card reveal" style="border-color:rgba(179,155,255,0.25);">
+        <div class="card-icon" style="background:rgba(179,155,255,0.1); border-color:rgba(179,155,255,0.35); color:var(--violet);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="7" cy="7" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="14" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M2 17c0-2.8 2.2-5 5-5s5 2.2 5 5M12 17c0-2-1-3.6-2.6-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Licencias centralizadas <span class="tag teams" style="margin-left:6px;">TEAMS</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Un solo panel de facturación para todas las licencias del equipo, con altas y bajas sin tocar la terminal de cada dev.</p>
+      </div>
+      <div class="card reveal" style="border-color:rgba(179,155,255,0.25);">
+        <div class="card-icon" style="background:rgba(179,155,255,0.1); border-color:rgba(179,155,255,0.35); color:var(--violet);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="12" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M3 8h14" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Facturación consolidada <span class="tag teams" style="margin-left:6px;">TEAMS</span></h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Una sola factura mensual para todo el equipo, con reportes de uso por integrante disponibles para el admin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" style="text-align:center;">
+  <div class="wrap">
+    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">¿Listo para dejar de leer código a solas?</h2>
+    <div class="reveal" style="display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="installation.html">Instalar gratis</a>
+      <a class="btn btn-ghost" href="plans.html">Comparar planes</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+        <p>Tu consultor de IA dentro de la terminal. Un proyecto de RGS Labs™.</p>
+      </div>
+      <div class="footer-col"><h4>Producto</h4><ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="plans.html">Planes</a></li>
+        <li><a href="installation.html">Instalación</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Recursos</h4><ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI#readme" target="_blank" rel="noopener">Documentación</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/blob/main/LICENSE" target="_blank" rel="noopener">Licencia Apache 2.0</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RGS Labs™ · DataForge CLI</span>
+      <span>Desarrollado con ♥ en Xalapa, México</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — DataForge CLI</title>
+<meta name="description" content="Preguntas frecuentes sobre DataForge CLI: licenciamiento, privacidad, uso de Groq, código abierto, planes y actualizaciones.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .faq-group{ margin-bottom:48px; }
+  .faq-group h3{
+    font-family:var(--font-mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--green); margin-bottom:16px;
+  }
+  .faq-item{ border-bottom:1px solid var(--border); }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:20px 4px; cursor:pointer; background:none; border:none; width:100%; text-align:left;
+    color:var(--text); font-family:var(--font-ui); font-size:15.5px; font-weight:500;
+  }
+  .faq-q .icon{ flex-shrink:0; transition:transform 0.25s ease; color:var(--text-dim); }
+  .faq-item.open .faq-q .icon{ transform:rotate(45deg); color:var(--green); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+  .faq-item.open .faq-a{ max-height:400px; }
+  .faq-a p{ padding:0 4px 22px; color:var(--text-muted); font-size:14.5px; max-width:700px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="plans.html">Planes</a></li>
+      <li><a href="installation.html">Instalación</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="plans.html">Obtener PRO</a>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="dot"></span>FAQ</span>
+    <h1 class="reveal in">Preguntas frecuentes</h1>
+    <p class="reveal in">Todo lo que necesitas saber sobre licencias, privacidad y cómo funciona DataForge por dentro.</p>
+  </div>
+</header>
+
+<section style="padding-top:20px;">
+  <div class="wrap" style="max-width:760px;">
+
+    <div class="faq-group reveal">
+      <h3>Licenciamiento</h3>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿DataForge CLI es de código abierto?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Sí. El núcleo de DataForge CLI (scan, explain, map, onboard) está publicado bajo licencia Apache 2.0 en GitHub y seguirá siendo así. PRO y Teams son un modelo Open-Core: funciones adicionales sobre el mismo núcleo abierto, no un fork cerrado.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Cómo se activa una licencia PRO?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Después de tu compra recibes un código con el formato <code>DFORGE-PRO-XXXX-XXXXX</code> por correo. Lo activas con <code>python main.py license TU-CODIGO</code> y el CLI lo guarda localmente en <code>~/.dataforge/license.json</code>.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿La licencia funciona en varias computadoras?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>El plan PRO está pensado para una persona. Si necesitas licencias para varios equipos de tu computadora personal o para tu equipo de trabajo, Teams está diseñado exactamente para eso, con administración centralizada.</p></div>
+      </div>
+    </div>
+
+    <div class="faq-group reveal">
+      <h3>Privacidad y Groq</h3>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Mi código se envía a algún servidor de RGS Labs?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>No. DataForge es local-first: el escaneo y la lectura de archivos ocurren en tu máquina. El único tráfico de red es la consulta a la API de Groq para generar el análisis, usando la API key que tú mismo configuras.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Qué es Groq y por qué lo usan?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Groq es el proveedor de inferencia de IA que usamos por su velocidad de respuesta, ideal para un flujo de terminal donde no quieres esperar. Tú traes tu propia API key; DataForge no la comparte con nadie más.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Guardan mis reportes en algún lado?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>No. Los reportes se guardan como archivos Markdown directamente en tu proyecto local. RGS Labs no tiene acceso a ellos.</p></div>
+      </div>
+    </div>
+
+    <div class="faq-group reveal">
+      <h3>Planes y actualizaciones</h3>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Puedo cancelar PRO cuando quiera?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Sí, sin permanencia. Al cancelar, tu licencia sigue activa hasta el final del periodo ya pagado y luego el CLI vuelve automáticamente a las funciones de Free.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Con qué frecuencia se actualiza DataForge?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>El núcleo recibe mejoras continuas en GitHub. Las versiones con features PRO nuevas se anuncian en el repositorio y en esta misma web, sin necesidad de que reinstales nada manualmente salvo un <code>git pull</code>.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          ¿Habrá soporte para más proveedores de IA además de Groq?
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Está en el roadmap. La idea es que puedas elegir tu proveedor preferido (Groq, OpenAI, Anthropic, modelos locales) sin cambiar tu flujo de trabajo.</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section-alt" style="text-align:center;">
+  <div class="wrap">
+    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">¿No encontraste tu respuesta?</h2>
+    <div class="reveal" style="display:flex; gap:14px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/discussions" target="_blank" rel="noopener">Abrir una Discussion</a>
+      <a class="btn btn-ghost" href="mailto:hola@rgslabs.dev">Escribir a RGS Labs™</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+        <p>Tu consultor de IA dentro de la terminal. Un proyecto de RGS Labs™.</p>
+      </div>
+      <div class="footer-col"><h4>Producto</h4><ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="plans.html">Planes</a></li>
+        <li><a href="installation.html">Instalación</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Recursos</h4><ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI#readme" target="_blank" rel="noopener">Documentación</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/blob/main/LICENSE" target="_blank" rel="noopener">Licencia Apache 2.0</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RGS Labs™ · DataForge CLI</span>
+      <span>Desarrollado con ♥ en Xalapa, México</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
