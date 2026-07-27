@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obtener DataForge PRO</title>
+<meta name="description" content="Activa DataForge PRO o Teams. Cómo funciona la compra, la generación de licencia y la activación en la terminal.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .flow{ display:flex; align-items:stretch; gap:0; overflow-x:auto; padding-bottom:8px; }
+  .flow-step{
+    flex:1; min-width:150px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+    padding:22px 18px; text-align:center; position:relative;
+  }
+  .flow-step + .flow-step{ margin-left:28px; }
+  .flow-step + .flow-step::before{
+    content:"→"; position:absolute; left:-24px; top:50%; transform:translateY(-50%);
+    color:var(--green); font-size:16px;
+  }
+  @media (max-width:900px){
+    .flow{ flex-direction:column; }
+    .flow-step + .flow-step{ margin-left:0; margin-top:28px; }
+    .flow-step + .flow-step::before{ content:"↓"; left:50%; top:-24px; transform:translateX(-50%); }
+  }
+  .flow-num{
+    width:30px; height:30px; border-radius:50%; background:var(--green-dim); border:1px solid var(--green-line);
+    color:var(--green); font-family:var(--font-mono); font-size:13px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
+  }
+  .flow-step h4{ font-size:14px; margin-bottom:6px; }
+  .flow-step p{ font-size:12.5px; color:var(--text-muted); margin:0; }
+
+  .plan-pick{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:560px; margin:0 auto 40px;
+  }
+  @media (max-width:640px){ .plan-pick{ grid-template-columns:1fr; } }
+  .plan-pick label{
+    display:block; cursor:pointer; padding:20px; border:1px solid var(--border); border-radius:var(--r-md);
+    background:var(--surface); transition:border-color 0.2s ease;
+  }
+  .plan-pick input{ display:none; }
+  .plan-pick input:checked + label{ border-color:var(--green-line); box-shadow:0 0 0 1px var(--green-line); background:var(--green-dim); }
+  .plan-pick .p-name{ font-family:var(--font-display); font-size:16px; }
+  .plan-pick .p-price{ font-family:var(--font-mono); font-size:13px; color:var(--text-muted); margin-top:4px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="testimonials.html">Comunidad</a></li>
+      <li><a href="plans.html">Planes</a></li>
+      <li><a href="installation.html">Instalación</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="#pick">Obtener PRO</a>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero" style="text-align:center;">
+  <div class="circuit-bg"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="dot"></span>Checkout</span>
+    <h1 class="reveal in" style="margin:16px auto 0;">Obtener DataForge PRO</h1>
+    <p class="reveal in" style="margin:14px auto 0;">Así funciona el proceso completo, de la compra a tu terminal activada.</p>
+  </div>
+</header>
+
+<!-- ============ FLOW EXPLAINER ============ -->
+<section style="padding-top:10px;">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:600px; margin-left:auto; margin-right:auto; text-align:center;">
+      <h2>Cómo funciona la activación</h2>
+      <p>Sin fricción, sin cuentas complicadas: tu licencia llega a tu correo y la activas con un comando.</p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="flow-step"><div class="flow-num">1</div><h4>Eliges tu plan</h4><p>PRO o Teams, mensual o anual.</p></div>
+      <div class="flow-step"><div class="flow-num">2</div><h4>Checkout</h4><p>Pago seguro vía Lemon Squeezy.</p></div>
+      <div class="flow-step"><div class="flow-num">3</div><h4>Pago confirmado</h4><p>El webhook dispara la generación de tu licencia.</p></div>
+      <div class="flow-step"><div class="flow-num">4</div><h4>Licencia generada</h4><p>Código único con formato DFORGE-PLAN-XXXX-XXXXX.</p></div>
+      <div class="flow-step"><div class="flow-num">5</div><h4>Entrega por correo</h4><p>Recibes tu licencia al instante.</p></div>
+      <div class="flow-step"><div class="flow-num">6</div><h4>Activación en CLI</h4><p><code>dataforge license TU-CODIGO</code></p></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:36px; max-width:560px; margin-left:auto; margin-right:auto;">
+      <p style="font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim); margin:0; text-align:center;">
+        ⚠️ El checkout automático (pasos 2–5) está en construcción. Por ahora, PRO y Teams se activan por contacto directo — el flujo de activación en la terminal (paso 6) ya funciona tal cual se describe.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAN PICKER ============ -->
+<section id="pick" class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:520px; margin-left:auto; margin-right:auto; text-align:center;">
+      <h2>Elige tu plan</h2>
+      <p>Podrás cambiar de plan cuando quieras.</p>
+    </div>
+
+    <form class="reveal" onsubmit="return false;">
+      <div class="plan-pick">
+        <div>
+          <input type="radio" name="plan" id="plan-pro" checked>
+          <label for="plan-pro">
+            <span class="tag pro">Pro</span>
+            <div class="p-name" style="margin-top:10px;">DataForge PRO</div>
+            <div class="p-price">$15 / mes</div>
+          </label>
+        </div>
+        <div>
+          <input type="radio" name="plan" id="plan-teams">
+          <label for="plan-teams">
+            <span class="tag teams">Teams</span>
+            <div class="p-name" style="margin-top:10px;">DataForge Teams</div>
+            <div class="p-price">$39 / usuario / mes</div>
+          </label>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <a class="btn btn-primary" href="mailto:hola@rgslabs.dev?subject=Quiero%20DataForge%20PRO%2FTeams" style="padding:14px 32px; font-size:15px;">
+          Continuar →
+        </a>
+        <p style="font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); margin-top:14px;">
+          Te contactaremos para completar la activación mientras el checkout automático está en desarrollo.
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ MINI FAQ ============ -->
+<section>
+  <div class="wrap" style="max-width:640px;">
+    <div class="section-head reveal">
+      <h2>Preguntas rápidas sobre la compra</h2>
+    </div>
+    <div class="grid" style="gap:16px;">
+      <div class="card reveal">
+        <h3 style="font-size:15px; margin-bottom:6px;">¿Cómo se ve mi licencia?</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin:0;">Un código con formato <code>DFORGE-PRO-XXXX-XXXXX</code>, único por compra, que activas con <code>dataforge license TU-CODIGO</code>.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:15px; margin-bottom:6px;">¿Dónde se guarda localmente?</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin:0;">En <code>~/.dataforge/license.json</code>, en tu propia máquina. Nada se sube a un servidor de RGS Labs aparte de la verificación inicial.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:15px; margin-bottom:6px;">¿Qué pasa si cancelo?</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin:0;">Tu licencia sigue activa hasta el final del periodo pagado. Después, el CLI vuelve automáticamente a Free — nunca deja de funcionar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+        <p>Tu consultor de IA dentro de la terminal. Un proyecto de RGS Labs™.</p>
+      </div>
+      <div class="footer-col"><h4>Producto</h4><ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="plans.html">Planes</a></li>
+        <li><a href="installation.html">Instalación</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Recursos</h4><ul>
+        <li><a href="docs.html">Documentación</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/blob/main/LICENSE" target="_blank" rel="noopener">Licencia Apache 2.0</a></li>
+        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RGS Labs™ · DataForge CLI</span>
+      <span>Desarrollado con ♥ por RGS Labs™ para programadores</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
