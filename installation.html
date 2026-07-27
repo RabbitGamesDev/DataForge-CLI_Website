@@ -139,51 +139,61 @@ pip install -r requirements.txt</code>
       <p>Cuatro pasos, de cero a tu primer reporte.</p>
     </div>
 
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-num">1</div>
-        <div>
-          <h3>Configura tu API key de Groq</h3>
-          <p>DataForge te la pedirá automáticamente la primera vez que lo ejecutes, y la guarda de forma local.</p>
-          <div class="code-block"><code>python main.py</code>
-            <button class="copy-btn" aria-label="Copiar" data-label="Copiar"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+    <div class="grid grid-2" style="align-items:start; gap:44px;">
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Configura tu API key de Groq</h3>
+            <p>DataForge te la pedirá la primera vez que lo ejecutes y la guarda localmente.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Corre tu primer scan</h3>
+            <p>Apunta a cualquier carpeta de proyecto y deja que DataForge la recorra completa.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Explora los demás comandos</h3>
+            <p><code>explain</code> para un archivo puntual, <code>map</code> para ver toda la arquitectura de un vistazo.</p>
+          </div>
+        </div>
+        <div class="step" style="margin-bottom:0;">
+          <div class="step-num">4</div>
+          <div>
+            <h3>(Opcional) Activa PRO</h3>
+            <p>Si ya tienes una licencia, actívala directamente desde la terminal con un solo comando.</p>
           </div>
         </div>
       </div>
 
-      <div class="step reveal">
-        <div class="step-num">2</div>
-        <div>
-          <h3>Corre tu primer scan</h3>
-          <p>Apunta a cualquier carpeta de proyecto. DataForge la recorre completa y genera un reporte técnico.</p>
-          <div class="code-block"><code>python main.py scan ./mi-proyecto</code>
-            <button class="copy-btn" aria-label="Copiar" data-label="Copiar"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+      <div class="reveal">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <span class="path">~/DataForge-CLI</span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="prompt">$</span> python main.py</div>
+            <div class="muted">🔑 Ingresa tu API key de Groq: ****************</div>
+            <div class="muted">✅ Configuración guardada correctamente.</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py scan ./mi-proyecto</div>
+            <div class="muted">🔍 Escaneando: mi-proyecto...</div>
+            <div class="muted">✅ Reporte guardado en ./report.md</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py explain ./mi-proyecto/main.py</div>
+            <div class="muted">🤖 Generando explicación...</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py license DFORGE-PRO-XXXXX-XXXXX</div>
+            <div class="muted">✅ Licencia PRO activada correctamente.</div>
+            <div style="margin-top:10px;"><span class="prompt">$</span> <span class="caret"></span></div>
           </div>
         </div>
       </div>
 
-      <div class="step reveal">
-        <div class="step-num">3</div>
-        <div>
-          <h3>Explora los demás comandos</h3>
-          <p>Prueba <code>explain</code> para un archivo específico o <code>map</code> para ver la arquitectura completa.</p>
-          <div class="code-block"><code>python main.py explain ./mi-proyecto/main.py
-python main.py map ./mi-proyecto</code>
-            <button class="copy-btn" aria-label="Copiar" data-label="Copiar"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="step reveal">
-        <div class="step-num">4</div>
-        <div>
-          <h3>(Opcional) Activa PRO</h3>
-          <p>Si ya tienes una licencia, actívala directamente desde la terminal.</p>
-          <div class="code-block"><code>python main.py license DFORGE-PRO-XXXXX-XXXXX</code>
-            <button class="copy-btn" aria-label="Copiar" data-label="Copiar"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -223,7 +233,7 @@ python main.py map ./mi-proyecto</code>
     </div>
     <div class="footer-bottom">
       <span>© 2026 RGS Labs™ · DataForge CLI</span>
-      <span>Desarrollado con ♥ en Xalapa, México</span>
+      <span>Desarrollado con ♥ por RGS Labs™ para programadores</span>
     </div>
   </div>
 </footer>
