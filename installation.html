@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ — DataForge CLI</title>
-<meta name="description" content="Preguntas frecuentes sobre DataForge CLI: licenciamiento, privacidad, uso de Groq, código abierto, planes y actualizaciones.">
+<title>Instalación — DataForge CLI</title>
+<meta name="description" content="Instala DataForge CLI en minutos: clona el repositorio, instala dependencias y corre tu primer scan. Guía paso a paso para Windows, macOS y Linux.">
 <link rel="icon" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  .faq-group{ margin-bottom:48px; }
-  .faq-group h3{
-    font-family:var(--font-mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--green); margin-bottom:16px;
+  .steps{ counter-reset:step; }
+  .step{ display:grid; grid-template-columns:44px 1fr; gap:20px; margin-bottom:36px; }
+  .step-num{
+    width:44px; height:44px; border-radius:50%; background:var(--green-dim); border:1px solid var(--green-line);
+    color:var(--green); font-family:var(--font-mono); font-weight:600; display:flex; align-items:center; justify-content:center;
   }
-  .faq-item{ border-bottom:1px solid var(--border); }
-  .faq-q{
-    display:flex; align-items:center; justify-content:space-between; gap:16px;
-    padding:20px 4px; cursor:pointer; background:none; border:none; width:100%; text-align:left;
-    color:var(--text); font-family:var(--font-ui); font-size:15.5px; font-weight:500;
-  }
-  .faq-q .icon{ flex-shrink:0; transition:transform 0.25s ease; color:var(--text-dim); }
-  .faq-item.open .faq-q .icon{ transform:rotate(45deg); color:var(--green); }
-  .faq-a{ max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
-  .faq-item.open .faq-a{ max-height:400px; }
-  .faq-a p{ padding:0 4px 22px; color:var(--text-muted); font-size:14.5px; max-width:700px; }
+  .step h3{ font-size:17px; margin-bottom:8px; }
+  .step p{ color:var(--text-muted); font-size:14.5px; margin-bottom:14px; }
+  .req-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .req-list li{ display:flex; align-items:center; gap:12px; font-size:14.5px; color:var(--text-muted); padding:14px 16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-sm); }
+  .req-list code{ color:var(--green); }
+  .tabs{ display:flex; gap:8px; margin-bottom:16px; }
+  .tab-btn{ font-family:var(--font-mono); font-size:12.5px; padding:8px 14px; border-radius:var(--r-pill); border:1px solid var(--border-strong); background:var(--surface); color:var(--text-muted); cursor:pointer; }
+  .tab-btn.active{ color:var(--green); border-color:var(--green-line); background:var(--green-dim); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
 </style>
 </head>
 <body>
@@ -55,108 +55,157 @@
 <header class="page-hero">
   <div class="circuit-bg"></div>
   <div class="wrap">
-    <span class="eyebrow reveal in"><span class="dot"></span>FAQ</span>
-    <h1 class="reveal in">Preguntas frecuentes</h1>
-    <p class="reveal in">Todo lo que necesitas saber sobre licencias, privacidad y cómo funciona DataForge por dentro.</p>
+    <span class="eyebrow reveal in"><span class="dot"></span>Instalación</span>
+    <h1 class="reveal in">Corriendo en menos de un minuto.</h1>
+    <p class="reveal in">Sin cuentas, sin paywall. Clona, instala y corre tu primer <code>scan</code>.</p>
   </div>
 </header>
 
+<!-- ============ REQUIREMENTS ============ -->
 <section style="padding-top:20px;">
-  <div class="wrap" style="max-width:760px;">
-
-    <div class="faq-group reveal">
-      <h3>Licenciamiento</h3>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿DataForge CLI es de código abierto?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>Sí. El núcleo de DataForge CLI (scan, explain, map, onboard) está publicado bajo licencia Apache 2.0 en GitHub y seguirá siendo así. PRO y Teams son un modelo Open-Core: funciones adicionales sobre el mismo núcleo abierto, no un fork cerrado.</p></div>
+  <div class="wrap">
+    <div class="grid grid-2" style="align-items:start; gap:48px;">
+      <div class="reveal">
+        <h2 style="font-size:22px; margin-bottom:18px;">Requisitos</h2>
+        <ul class="req-list">
+          <li><code>Python 3.9+</code> instalado y en el PATH</li>
+          <li><code>pip</code> para instalar dependencias</li>
+          <li><code>git</code> (opcional si descargas el ZIP)</li>
+          <li>Una API key de <code>Groq</code> — gratuita en console.groq.com</li>
+        </ul>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Cómo se activa una licencia PRO?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>Después de tu compra recibes un código con el formato <code>DFORGE-PRO-XXXX-XXXXX</code> por correo. Lo activas con <code>python main.py license TU-CODIGO</code> y el CLI lo guarda localmente en <code>~/.dataforge/license.json</code>.</p></div>
+      <div class="reveal">
+        <h2 style="font-size:22px; margin-bottom:18px;">Sistemas soportados</h2>
+        <ul class="req-list">
+          <li>🪟 Windows 10 / 11</li>
+          <li>🍎 macOS 12+</li>
+          <li>🐧 Linux (cualquier distro con Python 3.9+)</li>
+        </ul>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿La licencia funciona en varias computadoras?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+<!-- ============ INSTALL METHODS ============ -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Elige tu método</h2>
+      <p>Todos terminan en el mismo lugar: un <code>main.py</code> listo para correr.</p>
+    </div>
+
+    <div class="tabs reveal" role="tablist">
+      <button class="tab-btn active" data-tab="git">Git clone</button>
+      <button class="tab-btn" data-tab="zip">ZIP</button>
+      <button class="tab-btn" data-tab="pip">pip (próximamente)</button>
+    </div>
+
+    <div class="tab-panel active" data-panel="git">
+      <div class="code-block reveal"><code>git clone https://github.com/RabbitGamesDev/DataForge-CLI.git
+cd DataForge-CLI
+pip install -r requirements.txt</code>
+        <button class="copy-btn" aria-label="Copiar" data-label="Copiar">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         </button>
-        <div class="faq-a"><p>El plan PRO está pensado para una persona. Si necesitas licencias para varios equipos de tu computadora personal o para tu equipo de trabajo, Teams está diseñado exactamente para eso, con administración centralizada.</p></div>
       </div>
     </div>
 
-    <div class="faq-group reveal">
-      <h3>Privacidad y Groq</h3>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Mi código se envía a algún servidor de RGS Labs?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+    <div class="tab-panel" data-panel="zip">
+      <div class="code-block reveal"><code># 1. Descarga el ZIP desde GitHub → Code → Download ZIP
+# 2. Descomprime en la carpeta de tu elección
+cd DataForge-CLI-main
+pip install -r requirements.txt</code>
+        <button class="copy-btn" aria-label="Copiar" data-label="Copiar">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         </button>
-        <div class="faq-a"><p>No. DataForge es local-first: el escaneo y la lectura de archivos ocurren en tu máquina. El único tráfico de red es la consulta a la API de Groq para generar el análisis, usando la API key que tú mismo configuras.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Qué es Groq y por qué lo usan?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>Groq es el proveedor de inferencia de IA que usamos por su velocidad de respuesta, ideal para un flujo de terminal donde no quieres esperar. Tú traes tu propia API key; DataForge no la comparte con nadie más.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Guardan mis reportes en algún lado?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>No. Los reportes se guardan como archivos Markdown directamente en tu proyecto local. RGS Labs no tiene acceso a ellos.</p></div>
       </div>
     </div>
 
-    <div class="faq-group reveal">
-      <h3>Planes y actualizaciones</h3>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Puedo cancelar PRO cuando quiera?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+    <div class="tab-panel" data-panel="pip">
+      <div class="code-block reveal" style="opacity:0.6;"><code>pip install dataforge-cli   # aún no publicado en PyPI</code>
+        <button class="copy-btn" aria-label="Copiar" data-label="Copiar">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         </button>
-        <div class="faq-a"><p>Sí, sin permanencia. Al cancelar, tu licencia sigue activa hasta el final del periodo ya pagado y luego el CLI vuelve automáticamente a las funciones de Free.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Con qué frecuencia se actualiza DataForge?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>El núcleo recibe mejoras continuas en GitHub. Las versiones con features PRO nuevas se anuncian en el repositorio y en esta misma web, sin necesidad de que reinstales nada manualmente salvo un <code>git pull</code>.</p></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          ¿Habrá soporte para más proveedores de IA además de Groq?
-          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        </button>
-        <div class="faq-a"><p>Está en el roadmap. La idea es que puedas elegir tu proveedor preferido (Groq, OpenAI, Anthropic, modelos locales) sin cambiar tu flujo de trabajo.</p></div>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ============ QUICK START ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Quick start</h2>
+      <p>Cuatro pasos, de cero a tu primer reporte.</p>
+    </div>
+
+    <div class="grid grid-2" style="align-items:start; gap:44px;">
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Configura tu API key de Groq</h3>
+            <p>DataForge te la pedirá la primera vez que lo ejecutes y la guarda localmente.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Corre tu primer scan</h3>
+            <p>Apunta a cualquier carpeta de proyecto y deja que DataForge la recorra completa.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Explora los demás comandos</h3>
+            <p><code>explain</code> para un archivo puntual, <code>map</code> para ver toda la arquitectura de un vistazo.</p>
+          </div>
+        </div>
+        <div class="step" style="margin-bottom:0;">
+          <div class="step-num">4</div>
+          <div>
+            <h3>(Opcional) Activa PRO</h3>
+            <p>Si ya tienes una licencia, actívala directamente desde la terminal con un solo comando.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <span class="path">~/DataForge-CLI</span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="prompt">$</span> python main.py</div>
+            <div class="muted">🔑 Ingresa tu API key de Groq: ****************</div>
+            <div class="muted">✅ Configuración guardada correctamente.</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py scan ./mi-proyecto</div>
+            <div class="muted">🔍 Escaneando: mi-proyecto...</div>
+            <div class="muted">✅ Reporte guardado en ./report.md</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py explain ./mi-proyecto/main.py</div>
+            <div class="muted">🤖 Generando explicación...</div>
+            <div style="margin-top:12px;"><span class="prompt">$</span> python main.py license DFORGE-PRO-XXXXX-XXXXX</div>
+            <div class="muted">✅ Licencia PRO activada correctamente.</div>
+            <div style="margin-top:10px;"><span class="prompt">$</span> <span class="caret"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="section-alt" style="text-align:center;">
   <div class="wrap">
-    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">¿No encontraste tu respuesta?</h2>
-    <div class="reveal" style="display:flex; gap:14px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
-      <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/discussions" target="_blank" rel="noopener">Abrir una Discussion</a>
-      <a class="btn btn-ghost" href="mailto:hola@rgslabs.dev">Escribir a RGS Labs™</a>
+    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">¿Se te complicó algo?</h2>
+    <p style="color:var(--text-muted); margin:12px auto 26px; max-width:440px;" class="reveal">Revisa la documentación completa en el repo o abre un Issue — normalmente respondemos rápido.</p>
+    <div class="reveal" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="docs.html">Ver documentación</a>
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir un Issue</a>
     </div>
   </div>
 </section>
@@ -192,5 +241,16 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script>
+  // Simple tab switcher for install methods
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.tab-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
