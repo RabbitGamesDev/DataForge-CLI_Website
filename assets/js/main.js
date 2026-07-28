@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = annual ? el.dataset.priceAnnual : el.dataset.priceMonthly;
       });
       document.querySelectorAll('.price-period').forEach(el => {
-        el.textContent = annual ? '/mes, facturado anual' : '/mes';
+        const monthly = el.dataset.periodMonthly || '/mes';
+        const annualLabel = el.dataset.periodAnnual || (monthly + ', facturado anual');
+        el.textContent = annual ? annualLabel : monthly;
       });
     });
   }
