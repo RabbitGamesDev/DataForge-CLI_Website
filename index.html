@@ -203,14 +203,11 @@
       <div class="reveal">
         <span class="eyebrow"><span class="dot"></span>Instalación</span>
         <h2 style="margin:16px 0 14px; font-size:clamp(26px,3.6vw,34px);">Corriendo en menos de un minuto.</h2>
-        <p style="color:var(--text-muted); font-size:15.5px; margin-bottom:24px;">Clona el repositorio, instala las dependencias y empieza a escanear tu primer proyecto.</p>
+        <p style="color:var(--text-muted); font-size:15.5px; margin-bottom:24px;">Un solo comando, sin clonar nada primero. Funciona igual en PowerShell, CMD, Bash y Zsh.</p>
         <a class="btn btn-primary" href="installation.html">Ver guía completa →</a>
       </div>
-      <div class="reveal code-block" role="group" aria-label="Comando de instalación">
-        <code>git clone https://github.com/RabbitGamesDev/DataForge-CLI.git
-cd DataForge-CLI
-pip install -r requirements.txt
-python main.py</code>
+      <div class="reveal code-block" role="group" aria-label="Comando de instalación de 1 clic">
+        <code>python -c "import urllib.request; exec(urllib.request.urlopen('https://raw.githubusercontent.com/RabbitGamesDev/DataForge-CLI/main/install.py').read())"</code>
         <button class="copy-btn" aria-label="Copiar" data-label="Copiar">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         </button>
