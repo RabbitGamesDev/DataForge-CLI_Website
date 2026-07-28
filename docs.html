@@ -82,7 +82,7 @@
       <div class="card doc-command reveal">
         <h3 style="font-size:16.5px;">scan</h3>
         <div class="code-block doc-syntax"><code>dataforge scan [ruta]</code></div>
-        <p class="doc-desc">Recorre el proyecto completo, arma el contexto y le pide a la IA un reporte técnico: arquitectura, riesgos y sugerencias. Guarda el resultado como archivo Markdown en el proyecto.</p>
+        <p class="doc-desc">Recorre recursivamente el proyecto, extrae el contexto de código y consulta al motor de IA activo para generar un reporte integral de arquitectura, riesgos y sugerencias. Se guarda en Markdown dentro de <code>dataforge-reports/</code>.</p>
       </div>
 
       <div class="card doc-command reveal">
@@ -113,6 +113,18 @@
         <h3 style="font-size:16.5px;">welcome</h3>
         <div class="code-block doc-syntax"><code>dataforge welcome</code></div>
         <p class="doc-desc">Abre la carta de bienvenida de DataForge CLI en el navegador.</p>
+      </div>
+
+      <div class="card doc-command reveal">
+        <h3 style="font-size:16.5px;">setup</h3>
+        <div class="code-block doc-syntax"><code>dataforge setup</code></div>
+        <p class="doc-desc">Asistente interactivo para configurar o reconfigurar tu instalación: proveedor de IA, API key, idioma (<code>es</code>/<code>en</code>) y tema visual.</p>
+        <ul class="doc-flags">
+          <li><code>Free</code> — proveedor fijo en Groq + idioma + tema por defecto</li>
+          <li><code>Pro</code> — desbloquea los temas: Dark, Light, Tokyo Night, Dracula</li>
+          <li><code>Teams</code> — desbloquea selector de proveedor: OpenAI, Gemini, Claude, Ollama</li>
+        </ul>
+        <p class="doc-desc" style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim); margin-top:2px;">Si no hay licencia activa para una opción, <code>setup</code> la oculta en vez de mostrarla deshabilitada — nunca regala funciones de pago.</p>
       </div>
     </div>
   </div>
@@ -192,8 +204,15 @@
         <p class="doc-desc">Personaliza la firma que aparece en toda la documentación generada, para que salga con la identidad de tu estudio o cliente en vez de la de DataForge.</p>
       </div>
       <div class="card doc-command reveal" style="border-color:rgba(179,155,255,0.25);">
-        <h3 style="font-size:16.5px;">Proveedor de IA</h3>
-        <p class="doc-desc">Cada integrante del equipo puede usar su propia API key de Groq, OpenAI, Gemini, Claude u Ollama. DataForge cambia de proveedor sin cambiar el flujo de comandos.</p>
+        <h3 style="font-size:16.5px;">Enterprise AI — multi-proveedor</h3>
+        <p class="doc-desc">Cada integrante del equipo puede usar su propia API key. El enrutamiento ya está implementado en el CLI; <code>dataforge setup</code> lo desbloquea solo con licencia Teams activa.</p>
+        <ul class="doc-flags">
+          <li><code>Groq</code> — velocidad pura para scan y ask</li>
+          <li><code>Claude</code> — prosa técnica y arquitectura elegante</li>
+          <li><code>OpenAI</code> — precisión lógica estricta</li>
+          <li><code>Gemini</code> — análisis masivo de contexto</li>
+          <li><code>Ollama</code> — motor local, 100% offline</li>
+        </ul>
       </div>
       <div class="card doc-command reveal" style="border-color:rgba(179,155,255,0.25);">
         <h3 style="font-size:16.5px;">Team Presets</h3>
