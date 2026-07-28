@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — DataForge CLI (privado)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  body{ padding-bottom:80px; }
+  .admin-banner{
+    background:var(--green-dim); border-bottom:1px solid var(--green-line); color:var(--green);
+    font-family:var(--font-mono); font-size:12.5px; text-align:center; padding:10px 16px;
+  }
+  .admin-tabs{ display:flex; gap:10px; margin:32px 0 28px; }
+  .admin-tab-btn{
+    font-family:var(--font-mono); font-size:13px; padding:9px 18px; border-radius:100px;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--text-muted); cursor:pointer;
+  }
+  .admin-tab-btn.active{ color:var(--green); border-color:var(--green-line); background:var(--green-dim); }
+  .admin-panel{ display:none; }
+  .admin-panel.active{ display:block; }
+
+  .entry-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+    padding:20px; margin-bottom:16px; position:relative;
+  }
+  .entry-card .field{ margin-bottom:12px; }
+  .entry-card label{ display:block; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
+  .entry-card input[type="text"], .entry-card textarea, .entry-card select{
+    width:100%; background:var(--bg-elevated); border:1px solid var(--border-strong); border-radius:var(--r-sm);
+    padding:10px 12px; color:var(--text); font-family:var(--font-ui); font-size:14px; resize:vertical;
+  }
+  .entry-card textarea{ min-height:70px; font-family:var(--font-mono); font-size:13px; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:640px){ .field-row{ grid-template-columns:1fr; } }
+  .remove-entry{
+    position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border-strong);
+    color:var(--text-dim); width:28px; height:28px; border-radius:8px; cursor:pointer; font-size:14px;
+  }
+  .remove-entry:hover{ color:#ff6b6b; border-color:#ff6b6b; }
+
+  .toolbar{ display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; }
+  .output-box{
+    background:#080a08; border:1px solid var(--border-strong); border-radius:var(--r-md);
+    padding:18px; font-family:var(--font-mono); font-size:12.5px; color:#c8d2c4;
+    white-space:pre-wrap; word-break:break-word; max-height:480px; overflow-y:auto; margin-top:8px;
+  }
+  .hint{ color:var(--text-dim); font-size:13px; margin-bottom:18px; }
+  .item-list-help{ color:var(--text-dim); font-size:12px; margin-top:4px; font-family:var(--font-mono); }
+</style>
+</head>
+<body>
+
+<div class="admin-banner">🔒 Herramienta privada — no está enlazada en el sitio público. Genera bloques de HTML para copiar y pegar; no publica nada por sí sola.</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html"><span class="logo-dot"></span><span>DataForge<small>CLI</small></span></a>
+    <div class="nav-actions" style="margin-left:auto;">
+      <a class="btn btn-ghost" href="index.html">← Volver al sitio</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" style="max-width:900px; padding-top:32px;">
+  <h1 style="font-size:26px; margin-bottom:8px;">Panel de contenido</h1>
+  <p class="hint">Edita testimonios y roadmap aquí, genera el HTML, y pégalo directamente sobre el bloque correspondiente en <code>testimonials.html</code> / <code>roadmap.html</code>. Nada se guarda automáticamente — usa "Exportar JSON" antes de cerrar la pestaña si quieres seguir editando después.</p>
+
+  <div class="admin-tabs">
+    <button class="admin-tab-btn active" data-panel="testimonials">Testimonios</button>
+    <button class="admin-tab-btn" data-panel="roadmap">Roadmap</button>
+  </div>
+
+  <!-- ============ TESTIMONIALS PANEL ============ -->
+  <div class="admin-panel active" id="panel-testimonials">
+    <p class="hint">Cada tarjeta usa solo iniciales (nunca fotos). El badge normalmente es "Early Adopter" pero puedes cambiarlo.</p>
+    <div id="testimonial-list"></div>
+    <button class="btn btn-ghost" id="add-testimonial">+ Agregar testimonio</button>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" id="gen-testimonials">Generar HTML</button>
+      <button class="btn btn-outline-sm" id="export-testimonials">⬇ Exportar JSON</button>
+      <label class="btn btn-outline-sm" style="cursor:pointer;">⬆ Importar JSON<input type="file" id="import-testimonials" accept=".json" style="display:none;"></label>
+      <button class="btn btn-outline-sm" id="copy-testimonials">📋 Copiar</button>
+    </div>
+    <div class="output-box" id="output-testimonials">El HTML generado aparece aquí.</div>
+  </div>
+
+  <!-- ============ ROADMAP PANEL ============ -->
+  <div class="admin-panel" id="panel-roadmap">
+    <p class="hint">
+      En "Ítems", una línea por bullet. Empieza la línea con <code>[x]</code> si ya está listo (palomita verde) o <code>[ ]</code> si sigue pendiente (círculo gris).
+    </p>
+    <div id="roadmap-list"></div>
+    <button class="btn btn-ghost" id="add-stage">+ Agregar etapa</button>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" id="gen-roadmap">Generar HTML</button>
+      <button class="btn btn-outline-sm" id="export-roadmap">⬇ Exportar JSON</button>
+      <label class="btn btn-outline-sm" style="cursor:pointer;">⬆ Importar JSON<input type="file" id="import-roadmap" accept=".json" style="display:none;"></label>
+      <button class="btn btn-outline-sm" id="copy-roadmap">📋 Copiar</button>
+    </div>
+    <div class="output-box" id="output-roadmap">El HTML generado aparece aquí.</div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// Estado inicial — precargado con lo que ya está publicado hoy
+// ============================================================
+let testimonials = [
+  { initials: "DM", name: "Diego M.", role: "Freelance · apps móviles", quote: "Corrí dataforge onboard en un proyecto que heredé sin documentación y en dos minutos entendí por dónde entrar.", badge: "Early Adopter" },
+  { initials: "RG", name: "Rab G.", role: "Co-fundador, RGS Labs™", quote: "Lo uso antes de entregarle un proyecto a un cliente: dataforge scan me detecta cosas que se me pasaron.", badge: "Early Adopter" },
+  { initials: "CA", name: "Camila A.", role: "Estudiante de Ing. en Sistemas", quote: "Uso dataforge explain para entender proyectos de GitHub antes de aportarles algo.", badge: "Early Adopter" },
+  { initials: "JL", name: "Jorge L.", role: "Desarrollador backend", quote: "El map en ASCII es justo lo que necesito para explicarle la arquitectura a alguien nuevo.", badge: "Early Adopter" },
+  { initials: "VP", name: "Valeria P.", role: "QA / Automatización", quote: "Lo probé en un repo de pruebas caótico a propósito y aun así sacó un reporte usable.", badge: "Early Adopter" }
+];
+
+let roadmapStages = [
+  {
+    status: "Listo", title: "Free — v2.0", state: "done",
+    description: "El núcleo está construido y es lo que ya puedes instalar hoy.",
+    items: "[x] scan, explain, map, ask, onboard\n[x] Carta de bienvenida (welcome)\n[x] Asistente de configuración (setup)\n[x] Reportes locales en Markdown\n[x] Enrutamiento multi-proveedor — código listo, se libera por licencia\n[x] Sistema de licencias jerárquico (Free / Pro / Teams)"
+  },
+  {
+    status: "Listo", title: "Pro", state: "done",
+    description: "Toda la suite Pro está construida y funcionando sobre el sistema de licencias.",
+    items: "[x] doc++ — documentación de producción\n[x] architecture++ — diagramas Mermaid\n[x] explain --junior/--senior/--teacher/--manager\n[x] export++ (md/txt/json/html)\n[x] presets automáticos\n[x] themes (Dark, Light, Tokyo Night, Dracula)"
+  },
+  {
+    status: "Listo", title: "Teams", state: "done",
+    description: "Todo el nivel Teams, incluida la gestión de equipo, ya está construido.",
+    items: "[x] Enrutamiento multi-proveedor (Groq, OpenAI, Gemini, Claude, Ollama)\n[x] Team Branding personalizado\n[x] Shared Configuration\n[x] Team Presets\n[x] Priority Updates"
+  },
+  {
+    status: "En construcción · v2.1–v2.3", title: "Automatización comercial", state: "now",
+    description: "La última pieza para que \"Obtener PRO\" sea un flujo 100% automático.",
+    items: "[ ] Checkout con Lemon Squeezy\n[ ] Webhook → generación de licencia automática\n[ ] Entrega de licencia por correo\n[ ] Portal de autogestión / Dashboard de cliente\n[ ] Renovaciones y activaciones offline"
+  },
+  {
+    status: "Visión · v2.5", title: "Comunidad", state: "",
+    description: "Hacia dónde queremos llevar DataForge una vez que la base comercial esté sólida.",
+    items: "[ ] Soporte para plugins de comunidad\n[ ] Análisis de seguridad estática (SAST) integrado\n[ ] Sincronización cifrada de presets en la nube"
+  }
+];
+
+// ============================================================
+// Tabs
+// ============================================================
+document.querySelectorAll(".admin-tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".admin-tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".admin-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.panel).classList.add("active");
+  });
+});
+
+// ============================================================
+// Testimonials rendering
+// ============================================================
+function renderTestimonials() {
+  const list = document.getElementById("testimonial-list");
+  list.innerHTML = "";
+  testimonials.forEach((t, i) => {
+    const el = document.createElement("div");
+    el.className = "entry-card";
+    el.innerHTML = `
+      <button class="remove-entry" data-i="${i}" title="Eliminar">✕</button>
+      <div class="field-row">
+        <div class="field"><label>Iniciales</label><input type="text" maxlength="2" data-field="initials" data-i="${i}" value="${escapeHtml(t.initials)}"></div>
+        <div class="field"><label>Badge</label><input type="text" data-field="badge" data-i="${i}" value="${escapeHtml(t.badge)}"></div>
+      </div>
+      <div class="field"><label>Nombre</label><input type="text" data-field="name" data-i="${i}" value="${escapeHtml(t.name)}"></div>
+      <div class="field"><label>Rol / contexto</label><input type="text" data-field="role" data-i="${i}" value="${escapeHtml(t.role)}"></div>
+      <div class="field"><label>Cita</label><textarea data-field="quote" data-i="${i}">${escapeHtml(t.quote)}</textarea></div>
+    `;
+    list.appendChild(el);
+  });
+
+  list.querySelectorAll("input, textarea").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const i = +e.target.dataset.i;
+      const field = e.target.dataset.field;
+      testimonials[i][field] = e.target.value;
+    });
+  });
+  list.querySelectorAll(".remove-entry").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      testimonials.splice(+e.target.dataset.i, 1);
+      renderTestimonials();
+    });
+  });
+}
+
+document.getElementById("add-testimonial").addEventListener("click", () => {
+  testimonials.push({ initials: "XX", name: "Nombre Apellido", role: "Rol / contexto", quote: "Cita del testimonio.", badge: "Early Adopter" });
+  renderTestimonials();
+});
+
+function generateTestimonialsHTML() {
+  const cards = testimonials.map(t => `      <div class="card t-card quiet reveal">
+        <div class="t-head">
+          <div class="t-avatar">${escapeHtml(t.initials)}</div>
+          <div>
+            <div class="t-name">${escapeHtml(t.name)}</div>
+            <div class="t-role">${escapeHtml(t.role)}</div>
+          </div>
+        </div>
+        <p class="t-quote">"${escapeHtml(t.quote)}"</p>
+        <span class="t-badge">${escapeHtml(t.badge)}</span>
+      </div>`).join("\n\n");
+
+  return `    <div class="grid grid-3">\n\n${cards}\n\n    </div>`;
+}
+
+document.getElementById("gen-testimonials").addEventListener("click", () => {
+  document.getElementById("output-testimonials").textContent = generateTestimonialsHTML();
+});
+
+// ============================================================
+// Roadmap rendering
+// ============================================================
+function renderRoadmap() {
+  const list = document.getElementById("roadmap-list");
+  list.innerHTML = "";
+  roadmapStages.forEach((s, i) => {
+    const el = document.createElement("div");
+    el.className = "entry-card";
+    el.innerHTML = `
+      <button class="remove-entry" data-i="${i}" title="Eliminar">✕</button>
+      <div class="field-row">
+        <div class="field"><label>Estado (texto del pill)</label><input type="text" data-field="status" data-i="${i}" value="${escapeHtml(s.status)}"></div>
+        <div class="field"><label>Estilo visual</label>
+          <select data-field="state" data-i="${i}">
+            <option value="done" ${s.state === "done" ? "selected" : ""}>Listo (verde)</option>
+            <option value="now" ${s.state === "now" ? "selected" : ""}>En progreso (contorno)</option>
+            <option value="" ${s.state === "" ? "selected" : ""}>Futuro (gris)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Título de la etapa</label><input type="text" data-field="title" data-i="${i}" value="${escapeHtml(s.title)}"></div>
+      <div class="field"><label>Descripción</label><input type="text" data-field="description" data-i="${i}" value="${escapeHtml(s.description)}"></div>
+      <div class="field">
+        <label>Ítems (uno por línea, [x] listo / [ ] pendiente)</label>
+        <textarea data-field="items" data-i="${i}" style="min-height:120px;">${escapeHtml(s.items)}</textarea>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+
+  list.querySelectorAll("input, textarea, select").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const i = +e.target.dataset.i;
+      const field = e.target.dataset.field;
+      roadmapStages[i][field] = e.target.value;
+    });
+  });
+  list.querySelectorAll(".remove-entry").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      roadmapStages.splice(+e.target.dataset.i, 1);
+      renderRoadmap();
+    });
+  });
+}
+
+document.getElementById("add-stage").addEventListener("click", () => {
+  roadmapStages.push({ status: "Planeado", title: "Nueva etapa", state: "", description: "Descripción de la etapa.", items: "[ ] Primer ítem" });
+  renderRoadmap();
+});
+
+const CHECK_SVG = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 8 6 11 12 4" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const CIRCLE_SVG = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="5.5" stroke="var(--text-dim)" stroke-width="1.4"/></svg>`;
+
+function generateRoadmapHTML() {
+  const stageBlocks = roadmapStages.map(s => {
+    const stageClass = s.state ? `t-stage ${s.state} reveal` : `t-stage reveal`;
+    const itemLines = s.items.split("\n").map(l => l.trim()).filter(Boolean);
+    const itemsHtml = itemLines.map(line => {
+      const done = line.startsWith("[x]");
+      const text = line.replace(/^\[[ x]\]\s*/, "");
+      const icon = done ? CHECK_SVG : CIRCLE_SVG;
+      return `          <li>${icon}${escapeHtml(text)}</li>`;
+    }).join("\n");
+
+    return `      <div class="${stageClass}">
+        <div class="t-dot"></div>
+        <div class="t-head-row">
+          <span class="t-status">${escapeHtml(s.status)}</span>
+          <span class="t-title">${escapeHtml(s.title)}</span>
+        </div>
+        <p style="color:var(--text-muted); font-size:14.5px;">${escapeHtml(s.description)}</p>
+        <ul class="t-list">
+${itemsHtml}
+        </ul>
+      </div>`;
+  }).join("\n\n");
+
+  return `    <div class="timeline">\n\n${stageBlocks}\n\n    </div>`;
+}
+
+document.getElementById("gen-roadmap").addEventListener("click", () => {
+  document.getElementById("output-roadmap").textContent = generateRoadmapHTML();
+});
+
+// ============================================================
+// Export / Import JSON
+// ============================================================
+function downloadJSON(data, filename) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById("export-testimonials").addEventListener("click", () => downloadJSON(testimonials, "dataforge-testimonials.json"));
+document.getElementById("export-roadmap").addEventListener("click", () => downloadJSON(roadmapStages, "dataforge-roadmap.json"));
+
+document.getElementById("import-testimonials").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try { testimonials = JSON.parse(reader.result); renderTestimonials(); }
+    catch { alert("El archivo no es un JSON válido."); }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById("import-roadmap").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try { roadmapStages = JSON.parse(reader.result); renderRoadmap(); }
+    catch { alert("El archivo no es un JSON válido."); }
+  };
+  reader.readAsText(file);
+});
+
+// ============================================================
+// Copy to clipboard
+// ============================================================
+async function copyBox(id) {
+  const text = document.getElementById(id).textContent;
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+  }
+}
+document.getElementById("copy-testimonials").addEventListener("click", () => copyBox("output-testimonials"));
+document.getElementById("copy-roadmap").addEventListener("click", () => copyBox("output-roadmap"));
+
+// ============================================================
+// Utils
+// ============================================================
+function escapeHtml(str) {
+  return (str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+renderTestimonials();
+renderRoadmap();
+</script>
+
+</body>
+</html>
