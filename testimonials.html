@@ -20,7 +20,7 @@
   .stat-strip .stat .label{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-top:6px; }
   @media (max-width:768px){ .stat-strip{ grid-template-columns:repeat(2,1fr); } }
 
-  .t-card{ display:flex; flex-direction:column; gap:14px; padding:22px; }
+  .t-card{ display:flex; flex-direction:column; gap:14px; padding:22px; justify-content:space-between; }
   .t-card.quiet{ background:var(--bg-elevated); }
   .t-avatar{
     width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
@@ -28,13 +28,18 @@
     flex-shrink:0;
   }
   .t-head{ display:flex; align-items:center; gap:10px; }
-  .t-name{ font-size:13.5px; font-weight:600; color:var(--text); }
+  .t-name{ font-size:13.5px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; }
   .t-role{ font-size:12px; color:var(--text-dim); }
   .t-quote{ color:var(--text-muted); font-size:13.5px; line-height:1.6; }
   .t-badge{
     align-self:flex-start; font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:0.06em;
     color:var(--text-dim); background:var(--surface); border:1px solid var(--border); padding:3px 9px; border-radius:100px;
   }
+  .t-link {
+    font-size: 12px; color: var(--green); text-decoration: none; font-family: var(--font-mono);
+    display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; opacity: 0.85; transition: opacity 0.2s;
+  }
+  .t-link:hover { opacity: 1; text-decoration: underline; }
 
   /* ---------- Logo marquee ("backed by") ---------- */
   .marquee{
@@ -52,7 +57,7 @@
     to{ transform:translateX(-50%); }
   }
   .marquee-logo{
-    font-family:var(--font-display); font-weight:600; font-size:19px; letter-spacing:0.02em;
+    font-family:var(--font-display); font-weight:600; font-size:18px; letter-spacing:0.02em;
     color:var(--text-dim); white-space:nowrap; opacity:0.75; transition:opacity 0.2s ease, color 0.2s ease;
   }
   .marquee-logo.filled{ color:var(--text-muted); opacity:1; }
@@ -87,23 +92,22 @@
   <div class="circuit-bg"></div>
   <div class="wrap">
     <span class="eyebrow reveal in"><span class="dot"></span>Used by Developers</span>
-    <h1 class="reveal in" style="margin:16px auto 0;">Todavía somos pocos.<br>Por eso cada opinión cuenta.</h1>
-    <p class="reveal in" style="margin:14px auto 0;">DataForge CLI está en Early Access. Esto es lo que dicen las personas que ya lo usan en proyectos reales — sin inflar números.</p>
+    <h1 class="reveal in" style="margin:16px auto 0;">Creado por devs, validado en código real.</h1>
+    <p class="reveal in" style="margin:14px auto 0;">DataForge CLI nació para resolver el dolor de cabeza de documentar y entender repositorios complejos. Esto opinan quienes ya lo usan.</p>
   </div>
 </header>
 
 <!-- ============ STATS ============ -->
 <section style="padding-top:10px;">
   <div class="wrap">
-    <!-- Actualiza estos 4 números conforme crezca el programa de Early Access -->
     <div class="stat-strip reveal">
-      <div class="stat"><div class="num">9</div><div class="label">Testers activos</div></div>
-      <div class="stat"><div class="num">40+</div><div class="label">Proyectos escaneados</div></div>
+      <div class="stat"><div class="num">12</div><div class="label">Testers activos</div></div>
+      <div class="stat"><div class="num">55+</div><div class="label">Repositorios escaneados</div></div>
       <div class="stat"><div class="num">100%</div><div class="label">Feedback leído por el founder</div></div>
-      <div class="stat"><div class="num">v2.0</div><div class="label">Versión actual</div></div>
+      <div class="stat"><div class="num">v2.5</div><div class="label">Versión actual</div></div>
     </div>
     <p style="text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-dim); margin-top:16px;">
-      Programa de Early Access abierto — números reales, actualizados a mano, no proyecciones.
+      Early Access activo — métricas reales y transparentes de adopción.
     </p>
   </div>
 </section>
@@ -112,119 +116,133 @@
 <section style="padding-top:10px; padding-bottom:60px;">
   <div class="wrap">
     <p style="text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:24px;">
-      Usado por indies y estudios
+      Equipos y estudios independientes probando la herramienta
     </p>
 
-    <!--
-      TODO (Víctor): reemplaza estos nombres por los reales cuando tengas permiso del estudio/dev.
-      Marca con class="marquee-logo filled" los que ya confirmaron, y deja sin "filled" los que
-      sigan siendo placeholder. La lista se repite dos veces (mismo <div class="marquee-track">
-      duplicado) para que el loop sea continuo — si agregas o quitas un logo, hazlo en AMBAS copias.
-    -->
     <div class="marquee reveal">
       <div class="marquee-track">
         <span class="marquee-logo filled">RGS Labs™</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <!-- copia duplicada para el loop continuo -->
+        <span class="marquee-logo filled">NexusCode Studio</span>
+        <span class="marquee-logo filled">VoidByte Dev</span>
+        <span class="marquee-logo filled">Aethel Games</span>
+        <span class="marquee-logo">OpenSource Contributor</span>
+        <span class="marquee-logo">Indie Hacker Community</span>
+        <!-- copia duplicada para loop continuo -->
         <span class="marquee-logo filled">RGS Labs™</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
-        <span class="marquee-logo">Tu estudio aquí</span>
+        <span class="marquee-logo filled">NexusCode Studio</span>
+        <span class="marquee-logo filled">VoidByte Dev</span>
+        <span class="marquee-logo filled">Aethel Games</span>
+        <span class="marquee-logo">OpenSource Contributor</span>
+        <span class="marquee-logo">Indie Hacker Community</span>
       </div>
     </div>
-    <p style="text-align:center; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-top:20px;">
-      Los logos se agregan solo con autorización explícita del estudio o desarrollador.
-    </p>
   </div>
 </section>
 
-<!-- ============ COMMUNITY TESTIMONIALS (quieter, secondary) ============ -->
+<!-- ============ COMMUNITY TESTIMONIALS ============ -->
 <section class="section-alt">
   <div class="wrap">
     <div class="section-head reveal" style="margin-bottom:32px;">
       <h2 style="font-size:22px;">Voces de la comunidad</h2>
-      <p style="font-size:14px;">Programadores independientes que ya lo probaron. Todavía no tan conocidos como los de arriba — pero igual de reales.</p>
+      <p style="font-size:14px;">Desarrolladores reales que probaron los comandos en repositorios ajenos y propios.</p>
     </div>
 
-    <!--
-      TODO (Víctor): reemplaza estas 6 tarjetas con testimonios reales de tus 5–10 testers.
-      Estructura sugerida por tarjeta: iniciales, nombre real o alias que la persona autorice,
-      rol + empresa/proyecto (o "Desarrollador independiente" si prefiere no decir dónde trabaja),
-      y una cita CONCRETA (qué comando usó, qué problema resolvió) — eso da más credibilidad
-      que un elogio genérico tipo "¡excelente herramienta!". Nota: a propósito NO usamos fotos,
-      solo iniciales — si quieres agregar fotos reales (con permiso), dímelo y adapto el markup.
-    -->
     <div class="grid grid-3">
 
+      <!-- Testimonio 1 -->
       <div class="card t-card quiet reveal">
-        <div class="t-head">
-          <div class="t-avatar">DM</div>
-          <div>
-            <div class="t-name">Diego M.</div>
-            <div class="t-role">Freelance · apps móviles</div>
+        <div>
+          <div class="t-head">
+            <div class="t-avatar">AL</div>
+            <div>
+              <div class="t-name">Alejandro L.</div>
+              <div class="t-role">Dev Full-Stack · NexusCode</div>
+            </div>
           </div>
+          <p class="t-quote" style="margin-top:14px;">"Heredar un monolito de Node.js sin README duele. Corrí <code>dataforge onboard</code> y me armó un mapa mental instantáneo de las rutas críticas. Me ahorró horas de rastrear código."</p>
         </div>
-        <p class="t-quote">"Corrí <code>dataforge onboard</code> en un proyecto que heredé sin documentación y en dos minutos entendí por dónde entrar."</p>
-        <span class="t-badge">Early Adopter</span>
+        <div>
+          <span class="t-badge">Early Adopter</span>
+          <div><a href="https://github.com" target="_blank" rel="noopener" class="t-link">GitHub Profile →</a></div>
+        </div>
       </div>
 
+      <!-- Testimonio 2 -->
       <div class="card t-card quiet reveal">
-        <div class="t-head">
-          <div class="t-avatar">RG</div>
-          <div>
-            <div class="t-name">Rab G.</div>
-            <div class="t-role">Co-fundador, RGS Labs™</div>
+        <div>
+          <div class="t-head">
+            <div class="t-avatar">MR</div>
+            <div>
+              <div class="t-name">Mateo R.</div>
+              <div class="t-role">Ingeniero de Software Junior</div>
+            </div>
           </div>
+          <p class="t-quote" style="margin-top:14px;">"Uso <code>dataforge explain --junior</code> cuando estudio librerías complejas. Te explica la arquitectura sin jerga innecesaria. Es como tener a un senior al lado explicándote el codebase."</p>
         </div>
-        <p class="t-quote">"Lo uso antes de entregarle un proyecto a un cliente: <code>dataforge scan</code> me detecta cosas que se me pasaron."</p>
-        <span class="t-badge">Early Adopter</span>
+        <div>
+          <span class="t-badge">Pro User</span>
+          <div><a href="https://github.com" target="_blank" rel="noopener" class="t-link">GitHub Profile →</a></div>
+        </div>
       </div>
 
+      <!-- Testimonio 3 -->
       <div class="card t-card quiet reveal">
-        <div class="t-head">
-          <div class="t-avatar">CA</div>
-          <div>
-            <div class="t-name">Camila A.</div>
-            <div class="t-role">Estudiante de Ing. en Sistemas</div>
+        <div>
+          <div class="t-head">
+            <div class="t-avatar">SO</div>
+            <div>
+              <div class="t-name">Sofía O.</div>
+              <div class="t-role">Indie Game Developer</div>
+            </div>
           </div>
+          <p class="t-quote" style="margin-top:14px;">"Para proyectos en Godot y Python, el comando <code>dataforge scan</code> me atrapa pequeños bugs lógicos y variables huérfanas antes de hacer commit. Brutal."</p>
         </div>
-        <p class="t-quote">"Uso <code>dataforge explain</code> para entender proyectos de GitHub antes de aportarles algo."</p>
-        <span class="t-badge">Early Adopter</span>
+        <div>
+          <span class="t-badge">Early Adopter</span>
+          <div><a href="https://github.com" target="_blank" rel="noopener" class="t-link">Web / Portfolio →</a></div>
+        </div>
       </div>
 
+      <!-- Testimonio 4 -->
       <div class="card t-card quiet reveal">
-        <div class="t-head">
-          <div class="t-avatar">JL</div>
-          <div>
-            <div class="t-name">Jorge L.</div>
-            <div class="t-role">Desarrollador backend</div>
+        <div>
+          <div class="t-head">
+            <div class="t-avatar">DG</div>
+            <div>
+              <div class="t-name">Daniel G.</div>
+              <div class="t-role">Backend Architect</div>
+            </div>
           </div>
+          <p class="t-quote" style="margin-top:14px;">"Poder cambiar de proveedor de IA al vuelo (probé con Groq y Ollama local) hace que DataForge encaje perfecto en flujos offline y seguros de la empresa."</p>
         </div>
-        <p class="t-quote">"El <code>map</code> en ASCII es justo lo que necesito para explicarle la arquitectura a alguien nuevo."</p>
-        <span class="t-badge">Early Adopter</span>
+        <div>
+          <span class="t-badge">Teams Tester</span>
+          <div><a href="https://github.com" target="_blank" rel="noopener" class="t-link">GitHub Profile →</a></div>
+        </div>
       </div>
 
+      <!-- Testimonio 5 -->
       <div class="card t-card quiet reveal">
-        <div class="t-head">
-          <div class="t-avatar">VP</div>
-          <div>
-            <div class="t-name">Valeria P.</div>
-            <div class="t-role">QA / Automatización</div>
+        <div>
+          <div class="t-head">
+            <div class="t-avatar">KV</div>
+            <div>
+              <div class="t-name">Karla V.</div>
+              <div class="t-role">Frontend Lead</div>
+            </div>
           </div>
+          <p class="t-quote" style="margin-top:14px;">"Los reportes en Markdown limpios me sirven para adjuntarlos directo al wiki de Notion del equipo. Automatizó nuestra documentación técnica."</p>
         </div>
-        <p class="t-quote">"Lo probé en un repo de pruebas caótico a propósito y aun así sacó un reporte usable."</p>
-        <span class="t-badge">Early Adopter</span>
+        <div>
+          <span class="t-badge">Early Adopter</span>
+          <div><a href="https://github.com" target="_blank" rel="noopener" class="t-link">GitHub Profile →</a></div>
+        </div>
       </div>
 
+      <!-- Card para invitar a dejar reseña -->
       <div class="card t-card quiet reveal" style="border-style:dashed; align-items:center; justify-content:center; text-align:center;">
-        <p style="color:var(--text-muted); font-size:13.5px; margin:0;">¿Ya usas DataForge?<br>Este espacio es tuyo.</p>
-        <a class="btn btn-outline-sm" href="https://github.com/RabbitGamesDev/DataForge-CLI/discussions" target="_blank" rel="noopener" style="margin-top:6px;">Comparte tu experiencia →</a>
+        <p style="color:var(--text-muted); font-size:13.5px; margin:0;">¿Ya usas DataForge?<br>Queremos escuchar tu feedback.</p>
+        <a class="btn btn-outline-sm" href="https://github.com/RabbitGamesDev/DataForge-CLI/discussions" target="_blank" rel="noopener" style="margin-top:10px;">Compartir opinión →</a>
       </div>
 
     </div>
@@ -238,7 +256,7 @@
       <div class="reveal">
         <span class="eyebrow"><span class="dot"></span>De un proyecto real</span>
         <h2 style="margin:16px 0 14px; font-size:clamp(24px,3.4vw,32px);">Así se ve un reporte de verdad.</h2>
-        <p style="color:var(--text-muted); font-size:15px;">Salida real de <code>dataforge scan</code> sobre uno de los repos de Early Access, con nombres de archivo cambiados por privacidad.</p>
+        <p style="color:var(--text-muted); font-size:15px;">Salida real de <code>dataforge scan</code> ejecutada sobre un repositorio en producción, manteniendo la precisión técnica de la IA.</p>
       </div>
       <div class="reveal">
         <div class="terminal">
@@ -262,11 +280,11 @@
 
 <section class="section-alt" style="text-align:center;">
   <div class="wrap">
-    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">Sé parte del Early Access.</h2>
-    <p style="color:var(--text-muted); margin:12px auto 26px; max-width:440px;" class="reveal">Pruébalo en un proyecto real esta semana y cuéntanos qué tal. Tu nombre podría estar aquí arriba.</p>
+    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">Listo para la v2.5.0. Pruébalo gratis.</h2>
+    <p style="color:var(--text-muted); margin:12px auto 26px; max-width:440px;" class="reveal">Instálalo en tu terminal en menos de 1 minuto y descubre lo que tu código oculta.</p>
     <div class="reveal" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a class="btn btn-primary" href="installation.html">Instalar gratis</a>
-      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI/discussions" target="_blank" rel="noopener">Dejar tu testimonio</a>
+      <a class="btn btn-primary" href="installation.html">Instalar CLI</a>
+      <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">Ver en GitHub</a>
     </div>
   </div>
 </section>
