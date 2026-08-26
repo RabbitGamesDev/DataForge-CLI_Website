@@ -24,6 +24,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<style>
+  /* Ajuste visual para evitar scroll horizontal en bloques de código móviles */
+  .install-terminal-box {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    position: relative;
+    word-break: break-all;
+    white-space: pre-wrap;
+    color: var(--green);
+  }
+  .install-terminal-box .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+</style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +54,7 @@
   "operatingSystem": "Windows, macOS, Linux",
   "offers": [
     { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
-    { "@type": "Offer", "name": "Pro", "priceCurrency": "USD" }
+    { "@type": "Offer", "name": "Pro", "price": "15", "priceCurrency": "USD" }
   ],
   "publisher": { "@type": "Organization", "name": "RGS Labs™" }
 }
@@ -176,20 +197,37 @@
     <div class="grid grid-3">
       <div class="card reveal">
         <span class="tag free">Free</span>
-        <h3 style="font-size:24px; margin:16px 0 6px;">$0</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:18px;">Para siempre.</p>
-        <a class="btn btn-ghost btn-block" href="installation.html">Instalar</a>
+        <h3 style="font-size:28px; margin:16px 0 6px; font-family:var(--font-heading);">0 <span style="font-size:14px; color:var(--text-muted); font-weight:400;">USD</span></h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Para siempre. Todo el núcleo Open Source.</p>
+        <ul style="list-style:none; padding:0; margin:0 0 24px; font-size:13.5px; color:var(--text-muted); display:flex; flex-direction:column; gap:10px;">
+          <li>✓ Comandos scan, explain, map</li>
+          <li>✓ Reportes locales Markdown</li>
+          <li>✓ Soporte vía GitHub</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="installation.html">Instalar gratis</a>
       </div>
+
       <div class="card reveal" style="border-color:var(--green-line); box-shadow:0 0 0 1px var(--green-line);">
         <span class="tag pro">Pro</span>
-        <h3 style="font-size:24px; margin:16px 0 6px;">$15<span style="font-size:14px; color:var(--text-muted); font-weight:400;">/mes</span></h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:18px;">Para uso profesional diario.</p>
+        <h3 style="font-size:28px; margin:16px 0 6px; font-family:var(--font-heading);">$15 <span style="font-size:14px; color:var(--text-muted); font-weight:400;">/ mes</span></h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Para desarrolladores y uso profesional.</p>
+        <ul style="list-style:none; padding:0; margin:0 0 24px; font-size:13.5px; color:var(--text-muted); display:flex; flex-direction:column; gap:10px;">
+          <li>✓ Suite Pro completa (`doc++`, `architecture++`)</li>
+          <li>✓ Explicaciones por nivel (junior/senior)</li>
+          <li>✓ Temas visuales personalizados</li>
+        </ul>
         <a class="btn btn-primary btn-block" href="plans.html">Obtener PRO</a>
       </div>
+
       <div class="card reveal">
         <span class="tag teams">Teams</span>
-        <h3 style="font-size:24px; margin:16px 0 6px;">$39<span style="font-size:14px; color:var(--text-muted); font-weight:400;">/usuario</span></h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:18px;">Licencias y facturación centralizadas.</p>
+        <h3 style="font-size:28px; margin:16px 0 6px; font-family:var(--font-heading);">$39 <span style="font-size:14px; color:var(--text-muted); font-weight:400;">/ usuario</span></h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Para equipos y estudios de desarrollo.</p>
+        <ul style="list-style:none; padding:0; margin:0 0 24px; font-size:13.5px; color:var(--text-muted); display:flex; flex-direction:column; gap:10px;">
+          <li>✓ Enrutamiento multi-proveedor (Groq, OpenAI, etc.)</li>
+          <li>✓ Branding y configuraciones compartidas</li>
+          <li>✓ Facturación centralizada</li>
+        </ul>
         <a class="btn btn-ghost btn-block" href="plans.html">Ver detalles</a>
       </div>
     </div>
@@ -206,11 +244,10 @@
         <p style="color:var(--text-muted); font-size:15.5px; margin-bottom:24px;">Un solo comando, sin clonar nada primero. Funciona igual en PowerShell, CMD, Bash y Zsh.</p>
         <a class="btn btn-primary" href="installation.html">Ver guía completa →</a>
       </div>
-      <div class="reveal code-block" role="group" aria-label="Comando de instalación de 1 clic">
+      
+      <div class="reveal install-terminal-box" role="group" aria-label="Comando de instalación de 1 clic">
         <code>python -c "import urllib.request; exec(urllib.request.urlopen('https://raw.githubusercontent.com/RabbitGamesDev/DataForge-CLI/main/install.py').read())"</code>
-        <button class="copy-btn" aria-label="Copiar" data-label="Copiar">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="5" y="5" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M3 9V3a1 1 0 0 1 1-1h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        </button>
+        <button class="copy-btn btn btn-outline-sm" aria-label="Copiar" data-label="Copiar" style="padding:4px 10px; font-size:11px;">Copiar</button>
       </div>
     </div>
   </div>
@@ -247,9 +284,9 @@
         <h4>Recursos</h4>
         <ul>
           <li><a href="docs.html">Documentación</a></li>
-        <li><a href="roadmap.html">Roadmap</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Issues</a></li>
         </ul>
       </div>
       <div class="footer-col">
