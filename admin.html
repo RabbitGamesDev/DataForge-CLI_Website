@@ -16,10 +16,11 @@
     background:var(--green-dim); border-bottom:1px solid var(--green-line); color:var(--green);
     font-family:var(--font-mono); font-size:12.5px; text-align:center; padding:10px 16px;
   }
-  .admin-tabs{ display:flex; gap:10px; margin:32px 0 28px; }
+  .admin-tabs{ display:flex; gap:10px; margin:32px 0 28px; flex-wrap:wrap; }
   .admin-tab-btn{
     font-family:var(--font-mono); font-size:13px; padding:9px 18px; border-radius:100px;
     border:1px solid var(--border-strong); background:var(--surface); color:var(--text-muted); cursor:pointer;
+    transition: all 0.2s ease;
   }
   .admin-tab-btn.active{ color:var(--green); border-color:var(--green-line); background:var(--green-dim); }
   .admin-panel{ display:none; }
@@ -28,7 +29,9 @@
   .entry-card{
     background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
     padding:20px; margin-bottom:16px; position:relative;
+    transition: border-color 0.2s ease;
   }
+  .entry-card:hover{ border-color:var(--border-strong); }
   .entry-card .field{ margin-bottom:12px; }
   .entry-card label{ display:block; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
   .entry-card input[type="text"], .entry-card textarea, .entry-card select{
@@ -41,17 +44,42 @@
   .remove-entry{
     position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border-strong);
     color:var(--text-dim); width:28px; height:28px; border-radius:8px; cursor:pointer; font-size:14px;
+    display:flex; align-items:center; justify-content:center; transition: all 0.2s ease;
   }
-  .remove-entry:hover{ color:#ff6b6b; border-color:#ff6b6b; }
+  .remove-entry:hover{ color:#ff6b6b; border-color:#ff6b6b; background:rgba(255,107,107,0.05); }
 
-  .toolbar{ display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; }
+  .toolbar{ display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; align-items:center; }
   .output-box{
     background:#080a08; border:1px solid var(--border-strong); border-radius:var(--r-md);
     padding:18px; font-family:var(--font-mono); font-size:12.5px; color:#c8d2c4;
     white-space:pre-wrap; word-break:break-word; max-height:480px; overflow-y:auto; margin-top:8px;
   }
-  .hint{ color:var(--text-dim); font-size:13px; margin-bottom:18px; }
+  .hint{ color:var(--text-dim); font-size:13px; margin-bottom:18px; line-height:1.5; }
   .item-list-help{ color:var(--text-dim); font-size:12px; margin-top:4px; font-family:var(--font-mono); }
+  
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    justify-content: flex-end;
+  }
+  .btn-icon-action {
+    background: none;
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+  }
+  .btn-icon-action:hover {
+    color: var(--green);
+    border-color: var(--green-line);
+    background: var(--green-dim);
+  }
 </style>
 </head>
 <body>
@@ -126,27 +154,27 @@ let roadmapStages = [
   {
     status: "Listo", title: "Free — v2.0", state: "done",
     description: "El núcleo está construido y es lo que ya puedes instalar hoy.",
-    items: "[x] scan, explain, map, ask, onboard\n[x] Carta de bienvenida (welcome)\n[x] Asistente de configuración (setup)\n[x] Reportes locales en Markdown\n[x] Enrutamiento multi-proveedor — código listo, se libera por licencia\n[x] Sistema de licencias jerárquico (Free / Pro / Teams)"
+    items: "[x] scan, explain, map, ask, onboard\\n[x] Carta de bienvenida (welcome)\\n[x] Asistente de configuración (setup)\\n[x] Reportes locales en Markdown\\n[x] Enrutamiento multi-proveedor — código listo, se libera por licencia\\n[x] Sistema de licencias jerárquico (Free / Pro / Teams)"
   },
   {
     status: "Listo", title: "Pro", state: "done",
     description: "Toda la suite Pro está construida y funcionando sobre el sistema de licencias.",
-    items: "[x] doc++ — documentación de producción\n[x] architecture++ — diagramas Mermaid\n[x] explain --junior/--senior/--teacher/--manager\n[x] export++ (md/txt/json/html)\n[x] presets automáticos\n[x] themes (Dark, Light, Tokyo Night, Dracula)"
+    items: "[x] doc++ — documentación de producción\\n[x] architecture++ — diagramas Mermaid\\n[x] explain --junior/--senior/--teacher/--manager\\n[x] export++ (md/txt/json/html)\\n[x] presets automáticos\\n[x] themes (Dark, Light, Tokyo Night, Dracula)"
   },
   {
     status: "Listo", title: "Teams", state: "done",
     description: "Todo el nivel Teams, incluida la gestión de equipo, ya está construido.",
-    items: "[x] Enrutamiento multi-proveedor (Groq, OpenAI, Gemini, Claude, Ollama)\n[x] Team Branding personalizado\n[x] Shared Configuration\n[x] Team Presets\n[x] Priority Updates"
+    items: "[x] Enrutamiento multi-proveedor (Groq, OpenAI, Gemini, Claude, Ollama)\\n[x] Team Branding personalizado\\n[x] Shared Configuration\\n[x] Team Presets\\n[x] Priority Updates"
   },
   {
     status: "En construcción · v2.1–v2.3", title: "Automatización comercial", state: "now",
-    description: "La última pieza para que \"Obtener PRO\" sea un flujo 100% automático.",
-    items: "[ ] Checkout con Lemon Squeezy\n[ ] Webhook → generación de licencia automática\n[ ] Entrega de licencia por correo\n[ ] Portal de autogestión / Dashboard de cliente\n[ ] Renovaciones y activaciones offline"
+    description: "La última pieza para que \\"Obtener PRO\\" sea un flujo 100% automático.",
+    items: "[ ] Checkout con Lemon Squeezy\\n[ ] Webhook → generación de licencia automática\\n[ ] Entrega de licencia por correo\\n[ ] Portal de autogestión / Dashboard de cliente\\n[ ] Renovaciones y activaciones offline"
   },
   {
     status: "Visión · v2.5", title: "Comunidad", state: "",
     description: "Hacia dónde queremos llevar DataForge una vez que la base comercial esté sólida.",
-    items: "[ ] Soporte para plugins de comunidad\n[ ] Análisis de seguridad estática (SAST) integrado\n[ ] Sincronización cifrada de presets en la nube"
+    items: "[ ] Soporte para plugins de comunidad\\n[ ] Análisis de seguridad estática (SAST) integrado\\n[ ] Sincronización cifrada de presets en la nube"
   }
 ];
 
@@ -174,12 +202,16 @@ function renderTestimonials() {
     el.innerHTML = `
       <button class="remove-entry" data-i="${i}" title="Eliminar">✕</button>
       <div class="field-row">
-        <div class="field"><label>Iniciales</label><input type="text" maxlength="2" data-field="initials" data-i="${i}" value="${escapeHtml(t.initials)}"></div>
+        <div class="field"><label>Iniciales</label><input type="text" maxlength="3" data-field="initials" data-i="${i}" value="${escapeHtml(t.initials)}"></div>
         <div class="field"><label>Badge</label><input type="text" data-field="badge" data-i="${i}" value="${escapeHtml(t.badge)}"></div>
       </div>
       <div class="field"><label>Nombre</label><input type="text" data-field="name" data-i="${i}" value="${escapeHtml(t.name)}"></div>
       <div class="field"><label>Rol / contexto</label><input type="text" data-field="role" data-i="${i}" value="${escapeHtml(t.role)}"></div>
       <div class="field"><label>Cita</label><textarea data-field="quote" data-i="${i}">${escapeHtml(t.quote)}</textarea></div>
+      <div class="card-actions">
+        <button class="btn-icon-action" data-action="move-up" data-i="${i}">▲ Subir</button>
+        <button class="btn-icon-action" data-action="move-down" data-i="${i}">▼ Bajar</button>
+      </div>
     `;
     list.appendChild(el);
   });
@@ -191,10 +223,29 @@ function renderTestimonials() {
       testimonials[i][field] = e.target.value;
     });
   });
+
   list.querySelectorAll(".remove-entry").forEach(btn => {
     btn.addEventListener("click", (e) => {
       testimonials.splice(+e.target.dataset.i, 1);
       renderTestimonials();
+    });
+  });
+
+  list.querySelectorAll(".btn-icon-action").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const i = +e.target.dataset.i;
+      const action = e.target.dataset.action;
+      if (action === "move-up" && i > 0) {
+        const temp = testimonials[i];
+        testimonials[i] = testimonials[i - 1];
+        testimonials[i - 1] = temp;
+        renderTestimonials();
+      } else if (action === "move-down" && i < testimonials.length - 1) {
+        const temp = testimonials[i];
+        testimonials[i] = testimonials[i + 1];
+        testimonials[i + 1] = temp;
+        renderTestimonials();
+      }
     });
   });
 }
@@ -215,9 +266,9 @@ function generateTestimonialsHTML() {
         </div>
         <p class="t-quote">"${escapeHtml(t.quote)}"</p>
         <span class="t-badge">${escapeHtml(t.badge)}</span>
-      </div>`).join("\n\n");
+      </div>`).join("\\n\\n");
 
-  return `    <div class="grid grid-3">\n\n${cards}\n\n    </div>`;
+  return `    <div class="grid grid-3">\\n\\n${cards}\\n\\n    </div>`;
 }
 
 document.getElementById("gen-testimonials").addEventListener("click", () => {
@@ -251,6 +302,10 @@ function renderRoadmap() {
         <label>Ítems (uno por línea, [x] listo / [ ] pendiente)</label>
         <textarea data-field="items" data-i="${i}" style="min-height:120px;">${escapeHtml(s.items)}</textarea>
       </div>
+      <div class="card-actions">
+        <button class="btn-icon-action" data-action="move-up-r" data-i="${i}">▲ Subir</button>
+        <button class="btn-icon-action" data-action="move-down-r" data-i="${i}">▼ Bajar</button>
+      </div>
     `;
     list.appendChild(el);
   });
@@ -262,10 +317,29 @@ function renderRoadmap() {
       roadmapStages[i][field] = e.target.value;
     });
   });
+
   list.querySelectorAll(".remove-entry").forEach(btn => {
     btn.addEventListener("click", (e) => {
       roadmapStages.splice(+e.target.dataset.i, 1);
       renderRoadmap();
+    });
+  });
+
+  list.querySelectorAll(".btn-icon-action").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const i = +e.target.dataset.i;
+      const action = e.target.dataset.action;
+      if (action === "move-up-r" && i > 0) {
+        const temp = roadmapStages[i];
+        roadmapStages[i] = roadmapStages[i - 1];
+        roadmapStages[i - 1] = temp;
+        renderRoadmap();
+      } else if (action === "move-down-r" && i < roadmapStages.length - 1) {
+        const temp = roadmapStages[i];
+        roadmapStages[i] = roadmapStages[i + 1];
+        roadmapStages[i + 1] = temp;
+        renderRoadmap();
+      }
     });
   });
 }
@@ -281,13 +355,13 @@ const CIRCLE_SVG = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
 function generateRoadmapHTML() {
   const stageBlocks = roadmapStages.map(s => {
     const stageClass = s.state ? `t-stage ${s.state} reveal` : `t-stage reveal`;
-    const itemLines = s.items.split("\n").map(l => l.trim()).filter(Boolean);
+    const itemLines = s.items.split("\\n").map(l => l.trim()).filter(Boolean);
     const itemsHtml = itemLines.map(line => {
       const done = line.startsWith("[x]");
       const text = line.replace(/^\[[ x]\]\s*/, "");
       const icon = done ? CHECK_SVG : CIRCLE_SVG;
       return `          <li>${icon}${escapeHtml(text)}</li>`;
-    }).join("\n");
+    }).join("\\n");
 
     return `      <div class="${stageClass}">
         <div class="t-dot"></div>
@@ -300,9 +374,9 @@ function generateRoadmapHTML() {
 ${itemsHtml}
         </ul>
       </div>`;
-  }).join("\n\n");
+  }).join("\\n\\n");
 
-  return `    <div class="timeline">\n\n${stageBlocks}\n\n    </div>`;
+  return `    <div class="timeline">\\n\\n${stageBlocks}\\n\\n    </div>`;
 }
 
 document.getElementById("gen-roadmap").addEventListener("click", () => {
@@ -350,16 +424,21 @@ document.getElementById("import-roadmap").addEventListener("change", (e) => {
 // Copy to clipboard
 // ============================================================
 async function copyBox(id) {
-  const text = document.getElementById(id).textContent;
-  try { await navigator.clipboard.writeText(text); }
-  catch {
+  const box = document.getElementById(id);
+  const text = box.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    const orig = box.style.borderColor;
+    box.style.borderColor = "var(--green)";
+    setTimeout(() => { box.style.borderColor = orig; }, 600);
+  } catch {
     const ta = document.createElement("textarea");
     ta.value = text; document.body.appendChild(ta); ta.select();
     document.execCommand("copy"); document.body.removeChild(ta);
   }
 }
 document.getElementById("copy-testimonials").addEventListener("click", () => copyBox("output-testimonials"));
-document.getElementById("copy-roadmap").addEventListener("click", () => copyBox("output-roadmap"));
+document.getElementById("copy-roadmap").addEventListener("click", () => copyBox("open-roadmap") || copyBox("output-roadmap"));
 
 // ============================================================
 // Utils
