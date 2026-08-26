@@ -1,6 +1,26 @@
 // DataForge CLI — shared site behavior (no frameworks, no build step)
 
+// --- AUTO-INJECT GOOGLE TRANSLATE WIDGET ---
+window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'es,en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Inicializar contenedor y script de Google Translate de forma invisible/automática
+  const translateDiv = document.createElement('div');
+  translateDiv.id = 'google_translate_element';
+  translateDiv.style.display = 'none';
+  document.body.appendChild(translateDiv);
+
+  const script = document.createElement('script');
+  script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.head.appendChild(script);
 
   /* Mobile nav toggle */
   const toggle = document.querySelector('.nav-toggle');
