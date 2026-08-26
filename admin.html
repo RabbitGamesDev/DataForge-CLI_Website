@@ -154,27 +154,27 @@ let roadmapStages = [
   {
     status: "Listo", title: "Free — v2.0", state: "done",
     description: "El núcleo está construido y es lo que ya puedes instalar hoy.",
-    items: "[x] scan, explain, map, ask, onboard\\n[x] Carta de bienvenida (welcome)\\n[x] Asistente de configuración (setup)\\n[x] Reportes locales en Markdown\\n[x] Enrutamiento multi-proveedor — código listo, se libera por licencia\\n[x] Sistema de licencias jerárquico (Free / Pro / Teams)"
+    items: "[x] scan, explain, map, ask, onboard\n[x] Carta de bienvenida (welcome)\n[x] Asistente de configuración (setup)\n[x] Reportes locales en Markdown\n[x] Enrutamiento multi-proveedor — código listo, se libera por licencia\n[x] Sistema de licencias jerárquico (Free / Pro / Teams)"
   },
   {
     status: "Listo", title: "Pro", state: "done",
     description: "Toda la suite Pro está construida y funcionando sobre el sistema de licencias.",
-    items: "[x] doc++ — documentación de producción\\n[x] architecture++ — diagramas Mermaid\\n[x] explain --junior/--senior/--teacher/--manager\\n[x] export++ (md/txt/json/html)\\n[x] presets automáticos\\n[x] themes (Dark, Light, Tokyo Night, Dracula)"
+    items: "[x] doc++ — documentación de producción\n[x] architecture++ — diagramas Mermaid\n[x] explain --junior/--senior/--teacher/--manager\n[x] export++ (md/txt/json/html)\n[x] presets automáticos\n[x] themes (Dark, Light, Tokyo Night, Dracula)"
   },
   {
     status: "Listo", title: "Teams", state: "done",
     description: "Todo el nivel Teams, incluida la gestión de equipo, ya está construido.",
-    items: "[x] Enrutamiento multi-proveedor (Groq, OpenAI, Gemini, Claude, Ollama)\\n[x] Team Branding personalizado\\n[x] Shared Configuration\\n[x] Team Presets\\n[x] Priority Updates"
+    items: "[x] Enrutamiento multi-proveedor (Groq, OpenAI, Gemini, Claude, Ollama)\n[x] Team Branding personalizado\n[x] Shared Configuration\n[x] Team Presets\n[x] Priority Updates"
   },
   {
     status: "En construcción · v2.1–v2.3", title: "Automatización comercial", state: "now",
-    description: "La última pieza para que \\"Obtener PRO\\" sea un flujo 100% automático.",
-    items: "[ ] Checkout con Lemon Squeezy\\n[ ] Webhook → generación de licencia automática\\n[ ] Entrega de licencia por correo\\n[ ] Portal de autogestión / Dashboard de cliente\\n[ ] Renovaciones y activaciones offline"
+    description: 'La última pieza para que "Obtener PRO" sea un flujo 100% automático.',
+    items: "[ ] Checkout con Lemon Squeezy\n[ ] Webhook → generación de licencia automática\n[ ] Entrega de licencia por correo\n[ ] Portal de autogestión / Dashboard de cliente\n[ ] Renovaciones y activaciones offline"
   },
   {
     status: "Visión · v2.5", title: "Comunidad", state: "",
     description: "Hacia dónde queremos llevar DataForge una vez que la base comercial esté sólida.",
-    items: "[ ] Soporte para plugins de comunidad\\n[ ] Análisis de seguridad estática (SAST) integrado\\n[ ] Sincronización cifrada de presets en la nube"
+    items: "[ ] Soporte para plugins de comunidad\n[ ] Análisis de seguridad estática (SAST) integrado\n[ ] Sincronización cifrada de presets en la nube"
   }
 ];
 
@@ -266,9 +266,9 @@ function generateTestimonialsHTML() {
         </div>
         <p class="t-quote">"${escapeHtml(t.quote)}"</p>
         <span class="t-badge">${escapeHtml(t.badge)}</span>
-      </div>`).join("\\n\\n");
+      </div>`).join("\n\n");
 
-  return `    <div class="grid grid-3">\\n\\n${cards}\\n\\n    </div>`;
+  return `    <div class="grid grid-3">\n\n${cards}\n\n    </div>`;
 }
 
 document.getElementById("gen-testimonials").addEventListener("click", () => {
@@ -355,13 +355,13 @@ const CIRCLE_SVG = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
 function generateRoadmapHTML() {
   const stageBlocks = roadmapStages.map(s => {
     const stageClass = s.state ? `t-stage ${s.state} reveal` : `t-stage reveal`;
-    const itemLines = s.items.split("\\n").map(l => l.trim()).filter(Boolean);
+    const itemLines = s.items.split("\n").map(l => l.trim()).filter(Boolean);
     const itemsHtml = itemLines.map(line => {
       const done = line.startsWith("[x]");
       const text = line.replace(/^\[[ x]\]\s*/, "");
       const icon = done ? CHECK_SVG : CIRCLE_SVG;
       return `          <li>${icon}${escapeHtml(text)}</li>`;
-    }).join("\\n");
+    }).join("\n");
 
     return `      <div class="${stageClass}">
         <div class="t-dot"></div>
@@ -374,9 +374,9 @@ function generateRoadmapHTML() {
 ${itemsHtml}
         </ul>
       </div>`;
-  }).join("\\n\\n");
+  }).join("\n\n");
 
-  return `    <div class="timeline">\\n\\n${stageBlocks}\\n\\n    </div>`;
+  return `    <div class="timeline">\n\n${stageBlocks}\n\n    </div>`;
 }
 
 document.getElementById("gen-roadmap").addEventListener("click", () => {
@@ -414,7 +414,7 @@ document.getElementById("import-roadmap").addEventListener("change", (e) => {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = () => {
-    try { roadmapStages = JSON.parse(reader.result); renderRoadmap(); }
+  try { roadmapStages = JSON.parse(reader.result); renderRoadmap(); }
     catch { alert("El archivo no es un JSON válido."); }
   };
   reader.readAsText(file);
@@ -438,7 +438,7 @@ async function copyBox(id) {
   }
 }
 document.getElementById("copy-testimonials").addEventListener("click", () => copyBox("output-testimonials"));
-document.getElementById("copy-roadmap").addEventListener("click", () => copyBox("open-roadmap") || copyBox("output-roadmap"));
+document.getElementById("copy-roadmap").addEventListener("click", () => copyBox("output-roadmap"));
 
 // ============================================================
 // Utils
