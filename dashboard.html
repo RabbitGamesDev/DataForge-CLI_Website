@@ -4,14 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — DataForge CLI</title>
-<meta name="description" content="Vista previa del futuro panel de cliente de DataForge CLI: licencia, descargas, versiones, facturación y proveedores de IA.">
+<meta name="description" content="Panel de cliente de DataForge CLI: gestión de licencias, descargas, facturación y proveedores de IA.">
 <link rel="icon" href="assets/img/favicon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<!-- ============ GOOGLE ANALYTICS 4 ============ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WY8LV72EEK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WY8LV72EEK');
+</script>
+<!-- ============================================ -->
+
 <style>
-  body{ overflow-x:hidden; }
+  body{ overflow-x:hidden; background:var(--bg); color:var(--text); }
   .preview-banner{
     background:var(--green-dim); border-bottom:1px solid var(--green-line);
     color:var(--green); font-family:var(--font-mono); font-size:12.5px; text-align:center;
@@ -22,27 +33,32 @@
 
   .dash-sidebar{
     border-right:1px solid var(--border); padding:28px 18px; display:flex; flex-direction:column; gap:4px;
+    background:var(--surface);
   }
   .dash-user{ display:flex; align-items:center; gap:10px; padding:0 10px 22px; margin-bottom:14px; border-bottom:1px solid var(--border); }
   .dash-user .avatar{ width:34px; height:34px; border-radius:50%; background:var(--green); color:#04220a; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:600; font-size:13px; }
   .dash-user .name{ font-size:13.5px; font-weight:600; }
   .dash-user .email{ font-size:11.5px; color:var(--text-dim); }
 
-  .dash-nav a{
-    display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:var(--r-sm);
-    color:var(--text-muted); text-decoration:none; font-size:14px; transition:background 0.15s ease, color 0.15s ease;
+  .dash-nav button{
+    width:100%; display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:var(--r-sm);
+    color:var(--text-muted); text-decoration:none; font-size:14px; background:none; border:none; text-align:left; cursor:pointer;
+    font-family:var(--font-sans); transition:background 0.15s ease, color 0.15s ease;
   }
-  .dash-nav a:hover{ color:var(--text); background:var(--surface); }
-  .dash-nav a.active{ color:var(--green); background:var(--green-dim); }
+  .dash-nav button:hover{ color:var(--text); background:var(--bg-elevated); }
+  .dash-nav button.active{ color:var(--green); background:var(--green-dim); font-weight:500; }
 
   .dash-main{ padding:32px; }
   .dash-header{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
   .dash-header h1{ font-size:22px; }
 
+  .dash-section { display: none; }
+  .dash-section.active { display: block; }
+
   .dash-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:20px; }
   @media (max-width:1000px){ .dash-grid{ grid-template-columns:1fr; } }
 
-  .dash-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:24px; }
+  .dash-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:24px; margin-bottom: 20px; }
   .dash-card h3{ font-size:15px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; }
   .kv{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13.5px; }
   .kv:last-child{ border-bottom:none; }
@@ -64,7 +80,7 @@
 </head>
 <body>
 
-<div class="preview-banner">👁️ Vista previa de diseño — este dashboard todavía no está conectado a datos reales.</div>
+<div class="preview-banner">⚡ Portal del Cliente — Conectado a almacenamiento local (Listo para sincronizar con Lemon Squeezy).</div>
 
 <nav class="nav">
   <div class="wrap">
@@ -77,97 +93,225 @@
 
 <div class="dash-shell">
 
+  <!-- SIDEBAR NAVIGATION -->
   <aside class="dash-sidebar">
     <div class="dash-user">
-      <div class="avatar">VD</div>
+      <div class="avatar" id="user-avatar">DF</div>
       <div>
-        <div class="name">Víctor D.</div>
-        <div class="email">cliente@ejemplo.com</div>
+        <div class="name" id="user-name">Desarrollador</div>
+        <div class="email" id="user-email">cargando...</div>
       </div>
     </div>
     <nav class="dash-nav">
-      <a href="#" class="active">🏠 Resumen</a>
-      <a href="#">🔑 Licencia</a>
-      <a href="#">⬇️ Descargas</a>
-      <a href="#">🧾 Facturas</a>
-      <a href="#">🔌 Proveedores de IA</a>
-      <a href="#">📄 Documentación</a>
-      <a href="#">💬 Soporte</a>
+      <button class="active" data-target="sec-summary">🏠 Resumen</button>
+      <button data-target="sec-license">🔑 Licencia</button>
+      <button data-target="sec-downloads">⬇️ Descargas</button>
+      <button data-target="sec-billing">🧾 Facturas</button>
+      <button data-target="sec-ai">🔌 Proveedores de IA</button>
+      <button data-target="sec-docs">📄 Documentación</button>
+      <button data-target="sec-support">💬 Soporte</button>
     </nav>
   </aside>
 
+  <!-- MAIN CONTENT CONTAINER -->
   <main class="dash-main">
-    <div class="dash-header">
-      <h1>Resumen de tu cuenta</h1>
-      <span class="tag pro">Plan PRO</span>
-    </div>
 
-    <div class="dash-grid">
-
-      <!-- Left column -->
-      <div style="display:flex; flex-direction:column; gap:20px;">
-
-        <div class="dash-card">
-          <h3>Licencia <span class="pill-status connected">Activa</span></h3>
-          <div class="kv"><span class="k">Código</span><span class="v">DFORGE-PRO-8F92A-B41C9</span></div>
-          <div class="kv"><span class="k">Plan</span><span class="v">PRO</span></div>
-          <div class="kv"><span class="k">Emitida</span><span class="v">2026-06-12</span></div>
-          <div class="kv"><span class="k">Vence</span><span class="v">Sin vencimiento</span></div>
-        </div>
-
-        <div class="dash-card">
-          <h3>Descargas &amp; versiones</h3>
-          <table class="dash-table">
-            <thead><tr><th>Versión</th><th>Fecha</th><th></th></tr></thead>
-            <tbody>
-              <tr><td>v2.0 (actual)</td><td>Jul 2026</td><td><a href="installation.html" style="color:var(--green); text-decoration:none;">Ver guía →</a></td></tr>
-              <tr><td>v1.0</td><td>Feb 2026</td><td style="color:var(--text-dim);">Archivada</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="dash-card">
-          <h3>Facturas</h3>
-          <table class="dash-table">
-            <thead><tr><th>Periodo</th><th>Monto</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr><td colspan="3" style="text-align:center; color:var(--text-dim); font-family:var(--font-mono); font-size:12px; padding:18px 0;">Se mostrarán aquí en cuanto el checkout automático esté activo.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
+    <!-- 1. RESUMEN -->
+    <section id="sec-summary" class="dash-section active">
+      <div class="dash-header">
+        <h1>Resumen de tu cuenta</h1>
+        <span class="tag pro" id="badge-plan">Plan PRO</span>
       </div>
-
-      <!-- Right column -->
-      <div style="display:flex; flex-direction:column; gap:20px;">
-
-        <div class="dash-card">
-          <h3>Proveedores de IA</h3>
-          <div class="provider-row"><span class="p-name">Groq</span><span class="pill-status connected">Conectado</span></div>
-          <div class="provider-row"><span class="p-name">OpenAI</span><span class="pill-status locked">Teams</span></div>
-          <div class="provider-row"><span class="p-name">Gemini</span><span class="pill-status locked">Teams</span></div>
-          <div class="provider-row"><span class="p-name">Claude</span><span class="pill-status locked">Teams</span></div>
-          <div class="provider-row"><span class="p-name">Ollama (local)</span><span class="pill-status locked">Teams</span></div>
+      <div class="dash-grid">
+        <div style="display:flex; flex-direction:column;">
+          <div class="dash-card">
+            <h3>Licencia <span class="pill-status connected">Activa</span></h3>
+            <div class="kv"><span class="k">Código</span><span class="v" id="lbl-license-code">DFORGE-PRO-PENDING</span></div>
+            <div class="kv"><span class="k">Plan</span><span class="v" id="lbl-plan">PRO</span></div>
+            <div class="kv"><span class="k">Emitida</span><span class="v" id="lbl-date">Reciente</span></div>
+            <div class="kv"><span class="k">Vence</span><span class="v">Sin vencimiento</span></div>
+          </div>
+          <div class="dash-card">
+            <h3>Descargas &amp; versiones</h3>
+            <table class="dash-table">
+              <thead><tr><th>Versión</th><th>Fecha</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>v2.0 (actual)</td><td>Agosto 2026</td><td><a href="installation.html" style="color:var(--green); text-decoration:none;">Ver guía →</a></td></tr>
+                <tr><td>v1.0</td><td>Diciembre 2025</td><td style="color:var(--text-dim);">Archivada</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        <div class="dash-card">
-          <h3>Documentación</h3>
-          <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:14px;">Acceso directo a las guías que más usan los clientes PRO.</p>
-          <a class="btn btn-ghost btn-block" href="docs.html">Ver documentación completa</a>
+        <div style="display:flex; flex-direction:column;">
+          <div class="dash-card">
+            <h3>Proveedores de IA</h3>
+            <div class="provider-row"><span class="p-name">Groq</span><span class="pill-status connected">Conectado</span></div>
+            <div class="provider-row"><span class="p-name">OpenAI</span><span class="pill-status locked">Teams</span></div>
+            <div class="provider-row"><span class="p-name">Gemini</span><span class="pill-status locked">Teams</span></div>
+            <div class="provider-row"><span class="p-name">Claude</span><span class="pill-status locked">Teams</span></div>
+            <div class="provider-row"><span class="p-name">Ollama (local)</span><span class="pill-status locked">Teams</span></div>
+          </div>
+          <div class="dash-card">
+            <h3>Soporte prioritario</h3>
+            <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:14px;">Como cliente PRO, tus solicitudes tienen prioridad directa.</p>
+            <a class="btn btn-ghost btn-block" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir Issue en GitHub</a>
+          </div>
         </div>
-
-        <div class="dash-card">
-          <h3>Soporte</h3>
-          <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:14px;">Como cliente PRO, tus Issues se atienden con prioridad.</p>
-          <a class="btn btn-ghost btn-block" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir un Issue prioritario</a>
-        </div>
-
       </div>
+    </section>
 
-    </div>
+    <!-- 2. LICENCIA -->
+    <section id="sec-license" class="dash-section">
+      <div class="dash-header">
+        <h1>Gestión de Licencia</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Detalles de Activación</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Usa esta clave directamente en tu terminal ejecutando el comando de licenciamiento del CLI.</p>
+        <div class="code-block" style="margin-bottom:16px;">
+          <code id="cli-license-cmd">python main.py license DFORGE-PRO-PENDING</code>
+        </div>
+        <div class="kv"><span class="k">Estado del Nodo</span><span class="v" style="color:var(--green);">Sincronizado con Supabase Híbrido</span></div>
+        <div class="kv"><span class="k">Heartbeat Offline</span><span class="v">7 días habilitados</span></div>
+      </div>
+    </section>
+
+    <!-- 3. DESCARGAS -->
+    <section id="sec-downloads" class="dash-section">
+      <div class="dash-header">
+        <h1>Centro de Descargas</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Última versión estable (v2.0)</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Accede al código fuente completo o instala de forma automatizada.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/archive/refs/heads/main.zip">Descargar ZIP</a>
+          <a class="btn btn-ghost" href="installation.html">Ver guía de instalación</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FACTURAS -->
+    <section id="sec-billing" class="dash-section">
+      <div class="dash-header">
+        <h1>Facturación y Recibos</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Historial de pagos (Lemon Squeezy)</h3>
+        <table class="dash-table">
+          <thead><tr><th>Periodo</th><th>Monto</th><th>Estado</th></tr></thead>
+          <tbody id="billing-table-body">
+            <tr><td colspan="3" style="text-align:center; color:var(--text-dim); font-family:var(--font-mono); font-size:12px; padding:18px 0;">Cargando registros de transacciones...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. PROVEEDORES DE IA -->
+    <section id="sec-ai" class="dash-section">
+      <div class="dash-header">
+        <h1>Motores de Inteligencia Artificial</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Configuración de Proveedores</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Controla qué modelos soporta tu nivel de licencia actual.</p>
+        <div class="provider-row"><span class="p-name">Groq API (Predeterminado)</span><span class="pill-status connected">Activo</span></div>
+        <div class="provider-row"><span class="p-name">OpenAI GPT-4o</span><span class="pill-status locked">Requiere Teams</span></div>
+        <div class="provider-row"><span class="p-name">Google Gemini 1.5 Pro</span><span class="pill-status locked">Requiere Teams</span></div>
+        <div class="provider-row"><span class="p-name">Anthropic Claude 3.5 Sonnet</span><span class="pill-status locked">Requiere Teams</span></div>
+        <div class="provider-row"><span class="p-name">Ollama (100% Local / Offline)</span><span class="pill-status locked">Requiere Teams</span></div>
+      </div>
+    </section>
+
+    <!-- 6. DOCUMENTACIÓN -->
+    <section id="sec-docs" class="dash-section">
+      <div class="dash-header">
+        <h1>Documentación Técnica</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Guías Rápidas</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Consulta el manual completo de comandos avanzados (`doc++`, `architecture++`, presets).</p>
+        <a class="btn btn-primary" href="docs.html">Ir a documentación</a>
+      </div>
+    </section>
+
+    <!-- 7. SOPORTE -->
+    <section id="sec-support" class="dash-section">
+      <div class="dash-header">
+        <h1>Atención y Soporte</h1>
+      </div>
+      <div class="dash-card">
+        <h3>Canal Prioritario RGS Labs™</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Reporta cualquier incidencia técnica directamente con el equipo de desarrollo.</p>
+        <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir Issue en GitHub</a>
+      </div>
+    </section>
+
   </main>
 </div>
 
+<!-- ============ SCRIPT DE CONEXIÓN Y DINÁMICA ============ -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Manejo de Pestañas del Sidebar de forma fluida
+    const navButtons = document.querySelectorAll('.dash-nav button');
+    const sections = document.querySelectorAll('.dash-section');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => b.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+
+    // 2. Captura de Parámetros de URL (Ej: al volver de Lemon Squeezy tras el pago exitoso)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramLicense = urlParams.get('license');
+    const paramPlan = urlParams.get('plan');
+    const paramEmail = urlParams.get('email');
+
+    if (paramLicense) {
+      localStorage.setItem('df_license', paramLicense);
+      localStorage.setItem('df_plan', paramPlan || 'PRO');
+      localStorage.setItem('df_email', paramEmail || 'cliente@rgs-labs.com');
+      // Limpiar URL por estética
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // TODO: LEMON SQUEEZY CONFIG & SUPABASE HOOKS
+    // Aquí a futuro puedes hacer un fetch() a tu API o Supabase usando el email del usuario 
+    // para traer facturas reales y validar licencias en tiempo real.
+
+    // 3. Cargar datos en pantalla desde localStorage (o valores demo por defecto)
+    const currentLicense = localStorage.getItem('df_license') || 'DFORGE-PRO-8F92A-B41C9';
+    const currentPlan = localStorage.getItem('df_plan') || 'PRO';
+    const currentEmail = localStorage.getItem('df_email') || 'cliente@rgs-labs.com';
+
+    // Rellenar elementos del DOM dinámicamente
+    document.getElementById('lbl-license-code').textContent = currentLicense;
+    document.getElementById('cli-license-cmd').textContent = `python main.py license ${currentLicense}`;
+    document.getElementById('lbl-plan').textContent = currentPlan;
+    document.getElementById('badge-plan').textContent = `Plan ${currentPlan}`;
+    document.getElementById('user-email').textContent = currentEmail;
+    
+    // Generar iniciales del avatar basadas en el correo
+    const initials = currentEmail.substring(0, 2).toUpperCase();
+    document.getElementById('user-avatar').textContent = initials;
+    document.getElementById('user-name').textContent = currentEmail.split('@')[0];
+
+    // Simular tabla de facturación si hay licencia activa
+    const billingTable = document.getElementById('billing-table-body');
+    if (currentLicense) {
+      billingTable.innerHTML = `
+        <tr><td>Agosto 2026 - Licencia ${currentPlan}</td><td>$15.00 USD</td><td><span style="color:var(--green)">Pagado</span></td></tr>
+      `;
+    }
+  });
+</script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
