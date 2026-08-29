@@ -80,7 +80,7 @@
 </head>
 <body>
 
-<div class="preview-banner">⚡ Portal del Cliente — Conectado a almacenamiento local (Listo para sincronizar con Lemon Squeezy).</div>
+<div class="preview-banner">⚡ Portal del Cliente — Sincronizado con estado dinámico de usuario.</div>
 
 <nav class="nav">
   <div class="wrap">
@@ -120,16 +120,16 @@
     <section id="sec-summary" class="dash-section active">
       <div class="dash-header">
         <h1>Resumen de tu cuenta</h1>
-        <span class="tag pro" id="badge-plan">Plan PRO</span>
+        <span class="tag" id="badge-plan">Plan FREE</span>
       </div>
       <div class="dash-grid">
         <div style="display:flex; flex-direction:column;">
           <div class="dash-card">
-            <h3>Licencia <span class="pill-status connected">Activa</span></h3>
-            <div class="kv"><span class="k">Código</span><span class="v" id="lbl-license-code">DFORGE-PRO-PENDING</span></div>
-            <div class="kv"><span class="k">Plan</span><span class="v" id="lbl-plan">PRO</span></div>
-            <div class="kv"><span class="k">Emitida</span><span class="v" id="lbl-date">Reciente</span></div>
-            <div class="kv"><span class="k">Vence</span><span class="v">Sin vencimiento</span></div>
+            <h3>Licencia <span class="pill-status locked" id="lbl-status-pill">Free Tier</span></h3>
+            <div class="kv"><span class="k">Código</span><span class="v" id="lbl-license-code">Ninguna (Usa plan gratuito)</span></div>
+            <div class="kv"><span class="k">Plan</span><span class="v" id="lbl-plan">FREE</span></div>
+            <div class="kv"><span class="k">Emitida</span><span class="v">-</span></div>
+            <div class="kv"><span class="k">Vence</span><span class="v">-</span></div>
           </div>
           <div class="dash-card">
             <h3>Descargas &amp; versiones</h3>
@@ -152,9 +152,9 @@
             <div class="provider-row"><span class="p-name">Ollama (local)</span><span class="pill-status locked">Teams</span></div>
           </div>
           <div class="dash-card">
-            <h3>Soporte prioritario</h3>
-            <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:14px;">Como cliente PRO, tus solicitudes tienen prioridad directa.</p>
-            <a class="btn btn-ghost btn-block" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir Issue en GitHub</a>
+            <h3>Desbloquear Potencial</h3>
+            <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:14px;">Obtén acceso total a comandos avanzados adquiriendo una licencia.</p>
+            <a class="btn btn-primary btn-block" href="plans.html">Ver Planes PRO</a>
           </div>
         </div>
       </div>
@@ -167,12 +167,11 @@
       </div>
       <div class="dash-card">
         <h3>Detalles de Activación</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Usa esta clave directamente en tu terminal ejecutando el comando de licenciamiento del CLI.</p>
-        <div class="code-block" style="margin-bottom:16px;">
-          <code id="cli-license-cmd">python main.py license DFORGE-PRO-PENDING</code>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Usa tu clave directamente en la terminal con el comando de licenciamiento del CLI.</p>
+        <div class="code-block" style="margin-bottom:16px; background:var(--bg-elevated); padding:12px; border-radius:var(--r-sm);">
+          <code id="cli-license-cmd" style="font-family:var(--font-mono); font-size:13px; color:var(--green);"># Estás en el plan gratuito. Actualiza a PRO para obtener tu clave.</code>
         </div>
-        <div class="kv"><span class="k">Estado del Nodo</span><span class="v" style="color:var(--green);">Sincronizado con Supabase Híbrido</span></div>
-        <div class="kv"><span class="k">Heartbeat Offline</span><span class="v">7 días habilitados</span></div>
+        <div class="kv"><span class="k">Nodo de Validación</span><span class="v">Supabase Híbrido</span></div>
       </div>
     </section>
 
@@ -182,8 +181,8 @@
         <h1>Centro de Descargas</h1>
       </div>
       <div class="dash-card">
-        <h3>Última versión estable (v2.0)</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Accede al código fuente completo o instala de forma automatizada.</p>
+        <h3>Versión Estable Actual (v2.0)</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Accede al código fuente completo o consulta el método de instalación.</p>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
           <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/archive/refs/heads/main.zip">Descargar ZIP</a>
           <a class="btn btn-ghost" href="installation.html">Ver guía de instalación</a>
@@ -197,11 +196,11 @@
         <h1>Facturación y Recibos</h1>
       </div>
       <div class="dash-card">
-        <h3>Historial de pagos (Lemon Squeezy)</h3>
+        <h3>Historial de Pagos</h3>
         <table class="dash-table">
           <thead><tr><th>Periodo</th><th>Monto</th><th>Estado</th></tr></thead>
           <tbody id="billing-table-body">
-            <tr><td colspan="3" style="text-align:center; color:var(--text-dim); font-family:var(--font-mono); font-size:12px; padding:18px 0;">Cargando registros de transacciones...</td></tr>
+            <tr><td colspan="3" style="text-align:center; color:var(--text-dim); font-family:var(--font-mono); font-size:12px; padding:18px 0;">No hay transacciones registradas. <a href="plans.html" style="color:var(--green)">Ver planes PRO →</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -214,7 +213,7 @@
       </div>
       <div class="dash-card">
         <h3>Configuración de Proveedores</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Controla qué modelos soporta tu nivel de licencia actual.</p>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Controla los modelos compatibles con tu nivel de licencia actual.</p>
         <div class="provider-row"><span class="p-name">Groq API (Predeterminado)</span><span class="pill-status connected">Activo</span></div>
         <div class="provider-row"><span class="p-name">OpenAI GPT-4o</span><span class="pill-status locked">Requiere Teams</span></div>
         <div class="provider-row"><span class="p-name">Google Gemini 1.5 Pro</span><span class="pill-status locked">Requiere Teams</span></div>
@@ -230,7 +229,7 @@
       </div>
       <div class="dash-card">
         <h3>Guías Rápidas</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Consulta el manual completo de comandos avanzados (`doc++`, `architecture++`, presets).</p>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Consulta el manual completo de comandos de análisis, arquitectura y presets.</p>
         <a class="btn btn-primary" href="docs.html">Ir a documentación</a>
       </div>
     </section>
@@ -241,8 +240,8 @@
         <h1>Atención y Soporte</h1>
       </div>
       <div class="dash-card">
-        <h3>Canal Prioritario RGS Labs™</h3>
-        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Reporta cualquier incidencia técnica directamente con el equipo de desarrollo.</p>
+        <h3>Canal Oficial RGS Labs™</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px;">Reporta incidencias técnicas o dudas directamente en el repositorio.</p>
         <a class="btn btn-primary" href="https://github.com/RabbitGamesDev/DataForge-CLI/issues" target="_blank" rel="noopener">Abrir Issue en GitHub</a>
       </div>
     </section>
@@ -250,7 +249,7 @@
   </main>
 </div>
 
-<!-- ============ SCRIPT DE CONEXIÓN Y DINÁMICA ============ -->
+<!-- ============ SCRIPT DE DINÁMICA Y ESTADO DE USUARIO ============ -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // 1. Manejo de Pestañas del Sidebar de forma fluida
@@ -268,7 +267,7 @@
       });
     });
 
-    // 2. Captura de Parámetros de URL (Ej: al volver de Lemon Squeezy tras el pago exitoso)
+    // 2. Captura de Parámetros de URL (Al volver de Lemon Squeezy tras el pago exitoso)
     const urlParams = new URLSearchParams(window.location.search);
     const paramLicense = urlParams.get('license');
     const paramPlan = urlParams.get('plan');
@@ -278,38 +277,73 @@
       localStorage.setItem('df_license', paramLicense);
       localStorage.setItem('df_plan', paramPlan || 'PRO');
       localStorage.setItem('df_email', paramEmail || 'cliente@rgs-labs.com');
-      // Limpiar URL por estética
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // TODO: LEMON SQUEEZY CONFIG & SUPABASE HOOKS
-    // Aquí a futuro puedes hacer un fetch() a tu API o Supabase usando el email del usuario 
-    // para traer facturas reales y validar licencias en tiempo real.
+    // 3. Cargar datos reales o estado por defecto (FREE si no hay registro previo)
+    const currentLicense = localStorage.getItem('df_license');
+    const currentPlan = localStorage.getItem('df_plan') || 'FREE';
+    const currentEmail = localStorage.getItem('df_email');
 
-    // 3. Cargar datos en pantalla desde localStorage (o valores demo por defecto)
-    const currentLicense = localStorage.getItem('df_license') || 'DFORGE-PRO-8F92A-B41C9';
-    const currentPlan = localStorage.getItem('df_plan') || 'PRO';
-    const currentEmail = localStorage.getItem('df_email') || 'cliente@rgs-labs.com';
-
-    // Rellenar elementos del DOM dinámicamente
-    document.getElementById('lbl-license-code').textContent = currentLicense;
-    document.getElementById('cli-license-cmd').textContent = `python main.py license ${currentLicense}`;
-    document.getElementById('lbl-plan').textContent = currentPlan;
-    document.getElementById('badge-plan').textContent = `Plan ${currentPlan}`;
-    document.getElementById('user-email').textContent = currentEmail;
-    
-    // Generar iniciales del avatar basadas en el correo
-    const initials = currentEmail.substring(0, 2).toUpperCase();
-    document.getElementById('user-avatar').textContent = initials;
-    document.getElementById('user-name').textContent = currentEmail.split('@')[0];
-
-    // Simular tabla de facturación si hay licencia activa
+    const emailElem = document.getElementById('user-email');
+    const nameElem = document.getElementById('user-name');
+    const avatarElem = document.getElementById('user-avatar');
+    const badgePlan = document.getElementById('badge-plan');
+    const licenseCodeElem = document.getElementById('lbl-license-code');
+    const cliCmdElem = document.getElementById('cli-license-cmd');
+    const planLabel = document.getElementById('lbl-plan');
+    const statusPill = document.getElementById('lbl-status-pill');
     const billingTable = document.getElementById('billing-table-body');
-    if (currentLicense) {
+
+    if (!currentLicense || currentPlan === 'FREE') {
+      // Estado para usuarios sin licencia (Free Tier)
+      emailElem.textContent = 'Modo Invitado / Free';
+      nameElem.textContent = 'Desarrollador';
+      avatarElem.textContent = 'DF';
+      badgePlan.textContent = 'Plan FREE';
+      badgePlan.className = 'tag';
+      licenseCodeElem.textContent = 'Ninguna (Usa plan gratuito)';
+      cliCmdElem.textContent = '# Estás en el plan gratuito. Actualiza a PRO para desbloquear comandos avanzados.';
+      planLabel.textContent = 'FREE';
+      statusPill.textContent = 'Free Tier';
+      statusPill.className = 'pill-status locked';
+      
       billingTable.innerHTML = `
-        <tr><td>Agosto 2026 - Licencia ${currentPlan}</td><td>$15.00 USD</td><td><span style="color:var(--green)">Pagado</span></td></tr>
+        <tr><td colspan="3" style="text-align:center; color:var(--text-dim); font-family:var(--font-mono); font-size:12px; padding:18px 0;">No hay transacciones registradas. <a href="plans.html" style="color:var(--green)">Ver planes PRO →</a></td></tr>
       `;
+    } else {
+      // Estado para usuarios con licencia real (PRO / TEAMS)
+      emailElem.textContent = currentEmail || 'cliente@rgs-labs.com';
+      nameElem.textContent = (currentEmail ? currentEmail.split('@')[0] : 'Cliente');
+      avatarElem.textContent = (currentEmail ? currentEmail.substring(0, 2).toUpperCase() : 'PRO');
+      badgePlan.textContent = `Plan ${currentPlan}`;
+      badgePlan.className = `tag ${currentPlan.toLowerCase()}`;
+      
+      licenseCodeElem.textContent = currentLicense;
+      cliCmdElem.textContent = `python main.py license ${currentLicense}`;
+      planLabel.textContent = currentPlan;
+      statusPill.textContent = 'Activa';
+      statusPill.className = 'pill-status connected';
+
+      billingTable.innerHTML = `
+        <tr><td>Suscripción Activa (${currentPlan})</td><td>$15.00 USD</td><td><span style="color:var(--green)">Pagado</span></td></tr>
+      `;
+
+      // Si es plan TEAMS, desbloquear visualmente los proveedores locales en el dashboard
+      if (currentPlan === 'TEAMS') {
+        document.querySelectorAll('.provider-row .pill-status.locked').forEach(el => {
+          el.textContent = 'Disponible';
+          el.className = 'pill-status connected';
+        });
+      }
     }
+
+    // TODO: LEMON SQUEEZY & SUPABASE INTEGRATION A FUTURO
+    /* 
+      Cuando conectes tu base de datos o Webhook de Lemon Squeezy:
+      1. Haz una petición fetch() a tu API validando el token del usuario.
+      2. Rellena dinámicamente localStorage con la respuesta oficial del servidor.
+    */
   });
 </script>
 <script src="assets/js/main.js"></script>
