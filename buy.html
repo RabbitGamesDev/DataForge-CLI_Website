@@ -21,15 +21,6 @@
 </script>
 <!-- ============================================ -->
 <style>
-  .pricing-switch{ display:flex; align-items:center; justify-content:center; gap:12px; margin:0 0 32px; font-family:var(--font-mono); font-size:13px; color:var(--text-muted); }
-  .switch{ position:relative; width:44px; height:24px; }
-  .switch input{ opacity:0; width:0; height:0; }
-  .switch .track{ position:absolute; inset:0; background:var(--border-strong); border-radius:100px; cursor:pointer; transition:background 0.2s ease; }
-  .switch .track::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--text); border-radius:50%; transition:transform 0.2s ease; }
-  .switch input:checked + .track{ background:var(--green-line); }
-  .switch input:checked + .track::before{ transform:translateX(20px); background:var(--green); }
-  .save-badge{ font-size:11px; color:var(--green); background:var(--green-dim); border:1px solid var(--green-line); padding:2px 8px; border-radius:100px; }
-
   .flow{ display:flex; align-items:stretch; gap:0; overflow-x:auto; padding-bottom:8px; }
   .flow-step{
     flex:1; min-width:150px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
@@ -108,12 +99,12 @@
     </div>
 
     <div class="flow reveal">
-      <div class="flow-step"><div class="flow-num">1</div><h4>Eliges tu plan</h4><p>PRO o Teams, mensual o anual.</p></div>
+      <div class="flow-step"><div class="flow-num">1</div><h4>Eliges tu plan</h4><p>PRO o Teams mensual.</p></div>
       <div class="flow-step"><div class="flow-num">2</div><h4>Checkout</h4><p>Pago seguro vía Lemon Squeezy.</p></div>
       <div class="flow-step"><div class="flow-num">3</div><h4>Pago confirmado</h4><p>El webhook dispara la generación de tu licencia.</p></div>
       <div class="flow-step"><div class="flow-num">4</div><h4>Licencia generada</h4><p>Código único con formato DFORGE-PLAN-XXXX-XXXXX.</p></div>
       <div class="flow-step"><div class="flow-num">5</div><h4>Entrega por correo</h4><p>Recibes tu licencia al instante.</p></div>
-      <div class="flow-step"><div class="flow-num">6</div><h4>Activación en CLI</h4><p><code>dataforge license TU-CODIGO</code></p></div>
+      <div class="flow-step"><div class="flow-num">6</div><h4>Activación en CLI</h4><p><code>python main.py license TU-CODIGO</code></p></div>
     </div>
   </div>
 </section>
@@ -123,43 +114,33 @@
   <div class="wrap">
     <div class="section-head reveal" style="max-width:520px; margin-left:auto; margin-right:auto; text-align:center;">
       <h2>Elige tu plan</h2>
-      <p>Podrás cambiar de plan cuando quieras.</p>
-    </div>
-
-    <div class="pricing-switch reveal">
-      <span>Mensual</span>
-      <label class="switch">
-        <input type="checkbox" class="pricing-toggle" aria-label="Alternar entre precio mensual y anual">
-        <span class="track"></span>
-      </label>
-      <span>Anual <span class="save-badge">Ahorra 20%</span></span>
+      <p>Planes flexibles con cobro mensual y entrega inmediata.</p>
     </div>
 
     <form class="reveal" onsubmit="return false;">
       <div class="plan-pick">
         <div>
-          <input type="radio" name="plan" id="plan-pro" checked>
+          <input type="radio" name="plan" id="plan-pro" value="https://rgslabs.lemonsqueezy.com/checkout/buy/67870c4c-de7a-489b-b7b7-455a88e3a270" checked>
           <label for="plan-pro">
             <span class="tag pro">Pro</span>
             <div class="p-name" style="margin-top:10px;">DataForge PRO</div>
-            <div class="p-price"><span data-price-monthly="$15" data-price-annual="$12">$15</span><span class="price-period" data-period-monthly=" / mes" data-period-annual=" / mes, facturado anual"> / mes</span></div>
+            <div class="p-price"><span>$15</span><span class="price-period"> / mes</span></div>
             <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Ideal para desarrolladores independientes.</p>
           </label>
         </div>
         <div>
-          <input type="radio" name="plan" id="plan-teams">
+          <input type="radio" name="plan" id="plan-teams" value="https://rgslabs.lemonsqueezy.com/checkout/buy/e9f887fe-793d-4bd2-994b-4e4c3cbef1fe">
           <label for="plan-teams">
             <span class="tag teams">Teams</span>
             <div class="p-name" style="margin-top:10px;">DataForge Teams</div>
-            <div class="p-price"><span data-price-monthly="$39" data-price-annual="$31.20">$39</span><span class="price-period" data-period-monthly=" / mes" data-period-annual=" / mes, facturado anual"> / mes</span></div>
+            <div class="p-price"><span>$39</span><span class="price-period"> / mes</span></div>
             <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Incluye hasta 5 usuarios. Licencias colaborativas.</p>
           </label>
         </div>
       </div>
 
       <div style="text-align:center;">
-        <!-- Aquí es donde colocaremos las URLs de Lemon Squeezy cuando las configures -->
-        <a class="btn btn-primary" href="#" id="checkout-btn" style="padding:14px 32px; font-size:15px;">
+        <a class="btn btn-primary" href="#" id="checkout-btn" style="padding:14px 32px; font-size:15px;" onclick="window.location.href = document.querySelector('input[name=\'plan\']:checked').value;">
           Continuar a Checkout →
         </a>
         <p style="font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); margin-top:14px;">
