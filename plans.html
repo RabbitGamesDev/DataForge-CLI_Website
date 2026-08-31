@@ -21,15 +21,6 @@
 </script>
 <!-- ============================================ -->
 <style>
-  .pricing-switch{ display:flex; align-items:center; justify-content:center; gap:12px; margin:32px 0 48px; font-family:var(--font-mono); font-size:13px; color:var(--text-muted); }
-  .switch{ position:relative; width:44px; height:24px; }
-  .switch input{ opacity:0; width:0; height:0; }
-  .switch .track{ position:absolute; inset:0; background:var(--border-strong); border-radius:100px; cursor:pointer; transition:background 0.2s ease; }
-  .switch .track::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--text); border-radius:50%; transition:transform 0.2s ease; }
-  .switch input:checked + .track{ background:var(--green-line); }
-  .switch input:checked + .track::before{ transform:translateX(20px); background:var(--green); }
-  .save-badge{ font-size:11px; color:var(--green); background:var(--green-dim); border:1px solid var(--green-line); padding:2px 8px; border-radius:100px; }
-
   .plan-card{ position:relative; display:flex; flex-direction:column; }
   .plan-card.featured{ border-color:var(--green-line); box-shadow:0 0 0 1px var(--green-line), 0 30px 60px -30px rgba(124,255,0,0.15); }
   .plan-card .badge-pop{
@@ -70,7 +61,7 @@
     </ul>
     <div class="nav-actions">
       <a class="btn btn-ghost" href="https://github.com/RabbitGamesDev/DataForge-CLI" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-primary" href="#pricing">Obtener PRO</a>
+      <a class="btn btn-primary" href="buy.html#pick">Obtener PRO</a>
     </div>
     <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -87,17 +78,8 @@
   </div>
 </header>
 
-<section id="pricing" style="padding-top:0;">
+<section id="pricing" style="padding-top:20px;">
   <div class="wrap">
-
-    <div class="pricing-switch">
-      <span>Mensual</span>
-      <label class="switch">
-        <input type="checkbox" class="pricing-toggle" aria-label="Alternar entre precio mensual y anual">
-        <span class="track"></span>
-      </label>
-      <span>Anual <span class="save-badge">Ahorra 20%</span></span>
-    </div>
 
     <div class="grid grid-3">
 
@@ -120,7 +102,7 @@
         <span class="badge-pop">Más popular</span>
         <span class="tag pro">Pro</span>
         <div class="plan-price">
-          <span data-price-monthly="$15" data-price-annual="$12">$15</span><small class="price-period" data-period-monthly="/mes" data-period-annual="/mes, facturado anual">/mes</small>
+          $15<small>/mes</small>
         </div>
         <p style="color:var(--text-muted); font-size:13.5px;">Para uso profesional diario.</p>
         <ul class="plan-list">
@@ -137,7 +119,7 @@
       <div class="card plan-card reveal">
         <span class="tag teams">Teams</span>
         <div class="plan-price">
-          <span data-price-monthly="$39" data-price-annual="$31.20">$39</span><small class="price-period" data-price-monthly="/mes" data-price-annual="/mes, facturado anual">/mes</small>
+          $39<small>/mes</small>
         </div>
         <p style="color:var(--text-muted); font-size:13.5px;">Incluye hasta 5 usuarios.</p>
         <ul class="plan-list">
