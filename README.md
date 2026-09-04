@@ -14,7 +14,7 @@
 
 <br>
 
-**[rabbitgamesdev.github.io/DataForge-CLI_Website](https://rabbitgamesdev.github.io/DataForge-CLI_Website/)**
+**[Website private until the launch of the official DataForge CLI v2.0 tool.](https://github.com/RabbitGamesDev/DataForge-CLI)**
 
 </div>
 
