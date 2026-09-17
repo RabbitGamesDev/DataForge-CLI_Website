@@ -249,28 +249,34 @@
   </div>
 </section>
 
-<!-- ============ REAL OUTPUT SHOWCASE ============ -->
 <section>
   <div class="wrap">
     <div class="grid grid-2" style="align-items:center; gap:48px;">
       <div class="reveal">
         <span class="eyebrow"><span class="dot"></span>De un proyecto real</span>
-        <h2 style="margin:16px 0 14px; font-size:clamp(24px,3.4vw,32px);">Así se ve un reporte de verdad.</h2>
-        <p style="color:var(--text-muted); font-size:15px;">Salida real de <code>dataforge scan</code> ejecutada sobre un repositorio en producción, manteniendo la precisión técnica de la IA.</p>
+        <h2 style="margin:16px 0 14px; font-size:clamp(24px,3.4vw,32px);">Así se ve un reporte masivo de verdad.</h2>
+        <p style="color:var(--text-muted); font-size:15px;">Salida real de <code>dataforge scan</code> ejecutada sobre la terminal. No solo te da un resumen, te genera un desglose técnico completo y estructurado listo para producción.</p>
       </div>
       <div class="reveal">
-        <div class="terminal">
+        <div class="terminal" style="max-height: 420px; overflow-y: auto;">
           <div class="terminal-bar">
             <div class="dots"><span></span><span></span><span></span></div>
-            <span class="path">~/projects/inventory-api</span>
+            <span class="path">~/Desktop/demo_project</span>
           </div>
-          <div class="terminal-body">
-            <div><span class="prompt">$</span> dataforge scan .</div>
-            <div class="muted">✅ Se encontraron 27 archivos.</div>
+          <div class="terminal-body" style="font-size: 12.5px; line-height: 1.5;">
+            <div><span class="prompt">$</span> dataforge scan C:\Users\Lenovo\Desktop\demo_project</div>
+            <div class="muted">🔍 Escaneando: C:\Users\Lenovo\Desktop\demo_project...</div>
+            <div class="muted">✅ Se encontraron 1 archivos.</div>
             <div class="muted">🤖 Consultando a la IA...</div>
-            <div style="margin-top:10px;">→ Arquitectura: capa de servicios + repositorio SQLite</div>
-            <div>→ Riesgo: falta validación de entrada en <code>routes/orders.py</code></div>
-            <div>→ Sugerencia: mover la lógica de negocio fuera del controlador</div>
+            <div class="muted" style="margin-top:6px;">💾 Reporte guardado en: .../dataforge-reports/reporte_2026-09-17.txt</div>
+            
+            <div style="color: var(--green); margin-top: 10px; font-weight: bold;">**Análisis de la estructura y el código del proyecto**</div>
+            <div style="margin-top: 4px;">El proyecto es una iniciativa ambiciosa que busca optimizar flujos de desarrollo complejos y auditorías de código automatizadas.</div>
+            
+            <div style="color: var(--green); margin-top: 8px; font-weight: bold;">**Estructura del proyecto**</div>
+            <div>1. <b>Concepto y misión:</b> Empleado virtual de escritorio para recuperar tiempo en tareas de mantenimiento.</div>
+            <div>2. <b>Problema y solución:</b> Resuelve la pérdida de tiempo en auditorías manuales pesadas.</div>
+            <div>3. <b>Funcionalidades clave:</b> Análisis ejecutivo, escaneo profundo y Knowledge Vault.</div>
           </div>
         </div>
       </div>
@@ -280,7 +286,7 @@
 
 <section class="section-alt" style="text-align:center;">
   <div class="wrap">
-    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">Listo para la v2.5.0. Pruébalo gratis.</h2>
+    <h2 style="font-size:clamp(24px,3.4vw,32px);" class="reveal">Listo para la v2.0.0. Pruébalo gratis.</h2>
     <p style="color:var(--text-muted); margin:12px auto 26px; max-width:440px;" class="reveal">Instálalo en tu terminal en menos de 1 minuto y descubre lo que tu código oculta.</p>
     <div class="reveal" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
       <a class="btn btn-primary" href="installation.html">Instalar CLI</a>
