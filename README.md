@@ -14,7 +14,10 @@
 
 <br>
 
-**[Website private until the launch of the official DataForge CLI v2.0 tool.](https://github.com/RabbitGamesDev/DataForge-CLI)**
+
+**[Website Link](https://rabbitgamesdev.github.io/DataForge-CLI_Website/index.html)**
+
+
 
 </div>
 
@@ -49,7 +52,7 @@ If the CLI is *local-first, multi-provider, developer-first* — this site follo
 | `roadmap.html` | What's shipped, what's next |
 | `faq.html` | Licensing, privacy, plans |
 | `buy.html` | Checkout flow explainer |
-| `dashboard.html` | Customer dashboard *(UI preview, not wired up yet)* |
+| `404.html` | Page for wrong or incorrect links |
 | `admin.html` | Private content editor — not linked in nav |
 
 ---
