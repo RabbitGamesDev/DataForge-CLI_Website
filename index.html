@@ -124,26 +124,26 @@
 
 <!-- ============ REAL OUTPUT SHOWCASE ============ -->
       <div class="reveal in">
-        <div class="terminal" style="max-height: 420px; overflow-y: auto;">
+        <div class="terminal">
           <div class="terminal-bar">
             <div class="dots"><span></span><span></span><span></span></div>
-            <span class="path">~/Desktop/demo_project</span>
+            <span class="path">~/projects/store-api-v2</span>
           </div>
-          <div class="terminal-body" id="hero-terminal" style="font-size: 12.5px; line-height: 1.5;">
-            <div><span class="prompt">$</span> dataforge scan C:\Users\Lenovo\Desktop\demo_project</div>
-            <div class="muted">🔍 Escaneando: C:\Users\Lenovo\Desktop\demo_project...</div>
-            <div class="muted">✅ Se encontraron 1 archivos.</div>
+          <div class="terminal-body" id="hero-terminal" style="font-size: 12px; line-height: 1.45;">
+            <div><span class="prompt">$</span> dataforge scan .</div>
+            <div class="muted">🔍 Escaneando directorio actual...</div>
+            <div class="muted">✅ Se encontraron 18 archivos analizados.</div>
             <div class="muted">🤖 Consultando a la IA...</div>
-            <div class="muted" style="margin-top:6px;">💾 Reporte guardado en: .../dataforge-reports/reporte_2026-09-17.txt</div>
+            <div class="muted" style="margin-top:4px;">💾 Reporte guardado en: <code>./dataforge-reports/reporte_2026-09-17.txt</code></div>
             
-            <div style="color: var(--green); margin-top: 10px; font-weight: bold;">**Análisis de la estructura y el código del proyecto**</div>
-            <div style="margin-top: 4px;">El proyecto es una iniciativa ambiciosa que busca optimizar flujos de desarrollo complejos y auditorías de código automatizadas.</div>
+            <div style="color: var(--green); margin-top: 8px; font-weight: bold;">**Análisis de arquitectura y código**</div>
+            <div style="margin-top: 2px;">Arquitectura basada en microservicios Express + capa de abstracción con Supabase y autenticación JWT.</div>
             
-            <div style="color: var(--green); margin-top: 8px; font-weight: bold;">**Estructura del proyecto**</div>
-            <div>1. <b>Concepto y misión:</b> Empleado virtual de escritorio para recuperar tiempo en tareas de mantenimiento.</div>
-            <div>2. <b>Problema y solución:</b> Resuelve la pérdida de tiempo en auditorías manuales pesadas.</div>
-            <div>3. <b>Funcionalidades clave:</b> Análisis ejecutivo, escaneo profundo y Knowledge Vault.</div>
-            <div style="margin-top:10px;"><span class="prompt">$</span> <span class="caret"></span></div>
+            <div style="color: var(--green); margin-top: 6px; font-weight: bold;">**Puntos críticos & Recomendaciones**</div>
+            <div>1. <b>Seguridad:</b> Se detectó falta de rate-limiting en la ruta <code>/api/auth/login</code>.</div>
+            <div>2. <b>Rendimiento:</b> Las consultas en <code>orders.js</code> carecen de índices en la base de datos.</div>
+            <div>3. <b>Mantenibilidad:</b> Extraer la lógica de pasarela de pago a un middleware independiente.</div>
+            <div style="margin-top:8px;"><span class="prompt">$</span> <span class="caret"></span></div>
           </div>
         </div>
       </div>
