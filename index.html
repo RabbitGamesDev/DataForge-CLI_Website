@@ -122,29 +122,40 @@
         </div>
       </div>
 
+<!-- ============ REAL OUTPUT SHOWCASE ============ -->
+  <div class="wrap">
+    <div class="grid grid-2" style="align-items:center; gap:48px;">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span>De un proyecto real</span>
+        <h2 style="margin:16px 0 14px; font-size:clamp(24px,3.4vw,32px);">Así se ve un reporte masivo de verdad.</h2>
+        <p style="color:var(--text-muted); font-size:15px;">Salida real de <code>dataforge scan</code> ejecutada sobre la terminal. No solo te da un resumen, te genera un desglose técnico completo y estructurado listo para producción.</p>
+      </div>
       <div class="reveal in">
-        <div class="terminal">
+        <div class="terminal" style="max-height: 420px; overflow-y: auto;">
           <div class="terminal-bar">
             <div class="dots"><span></span><span></span><span></span></div>
-            <span class="path">~/projects/checkout-service</span>
+            <span class="path">~/Desktop/demo_project</span>
           </div>
-          <div class="terminal-body" id="hero-terminal">
-            <div><span class="prompt">$</span> dataforge scan .</div>
-            <div class="muted">🔍 Escaneando: checkout-service...</div>
-            <div class="muted">✅ Se encontraron 42 archivos.</div>
+          <div class="terminal-body" id="hero-terminal" style="font-size: 12.5px; line-height: 1.5;">
+            <div><span class="prompt">$</span> dataforge scan C:\Users\Lenovo\Desktop\demo_project</div>
+            <div class="muted">🔍 Escaneando: C:\Users\Lenovo\Desktop\demo_project...</div>
+            <div class="muted">✅ Se encontraron 1 archivos.</div>
             <div class="muted">🤖 Consultando a la IA...</div>
-            <div style="margin-top:10px;">✅ Reporte guardado en <code>./report.md</code></div>
-            <div style="margin-top:6px;">→ Arquitectura: API REST + colas de eventos</div>
-            <div>→ Riesgo detectado: falta de manejo de timeout en <code>payments.py</code></div>
-            <div>→ Sugerencia: extraer <code>PaymentGateway</code> a su propio módulo</div>
+            <div class="muted" style="margin-top:6px;">💾 Reporte guardado en: .../dataforge-reports/reporte_2026-09-17.txt</div>
+            
+            <div style="color: var(--green); margin-top: 10px; font-weight: bold;">**Análisis de la estructura y el código del proyecto**</div>
+            <div style="margin-top: 4px;">El proyecto es una iniciativa ambiciosa que busca optimizar flujos de desarrollo complejos y auditorías de código automatizadas.</div>
+            
+            <div style="color: var(--green); margin-top: 8px; font-weight: bold;">**Estructura del proyecto**</div>
+            <div>1. <b>Concepto y misión:</b> Empleado virtual de escritorio para recuperar tiempo en tareas de mantenimiento.</div>
+            <div>2. <b>Problema y solución:</b> Resuelve la pérdida de tiempo en auditorías manuales pesadas.</div>
+            <div>3. <b>Funcionalidades clave:</b> Análisis ejecutivo, escaneo profundo y Knowledge Vault.</div>
             <div style="margin-top:10px;"><span class="prompt">$</span> <span class="caret"></span></div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-</header>
 
 <!-- ============ TRUST STRIP ============ -->
 <section style="padding:32px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
