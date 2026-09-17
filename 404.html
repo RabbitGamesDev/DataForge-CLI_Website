@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Recurso No Encontrado | DataForge CLI</title>
+<meta name="description" content="La ruta que buscas no existe en este sector del CLI.">
+<link rel="icon" href="assets/img/favicon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- ============ GOOGLE ANALYTICS 4 ============ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WY8LV72EEK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WY8LV72EEK');
+</script>
+<!-- ============================================ -->
+
+<style>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .error-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .error-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 48px 32px;
+    max-width: 540px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Pequeño resplandor estético de fondo */
+  .error-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 150px; height: 4px;
+    background: var(--green);
+    box-shadow: 0 0 20px var(--green);
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin: 0 0 10px 0;
+    line-height: 1;
+  }
+
+  .error-code span {
+    color: var(--green);
+  }
+
+  .error-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .error-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .terminal-box {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-sm);
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--green);
+    text-align: left;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .terminal-box span.dim {
+    color: var(--text-dim);
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar Minimalista -->
+<nav class="nav">
+  <div class="wrap" style="display:flex; justify-content:center;">
+    <a class="nav-brand" href="index.html">
+      <span class="logo-dot"></span>
+      <span>DataForge<small>CLI</small></span>
+    </a>
+  </div>
+</nav>
+
+<!-- Contenido del Error 404 -->
+<main class="error-container">
+  <div class="error-card">
+    <h1 class="error-code">4<span>0</span>4</h1>
+    <h2 class="error-title">Ruta no encontrada en el sistema</h2>
+    <p class="error-desc">
+      El archivo, comando o página que intentas consultar no existe o fue reubicado en otra zona del repositorio.
+    </p>
+
+    <!-- Simulación de consola de error -->
+    <div class="terminal-box">
+      <div><span class="dim">&gt;</span> dataforge route --check <span style="color:var(--rose, #f43f5e);">[ERR_NOT_FOUND]</span></div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+      <a href="docs.html" class="btn btn-ghost">Consultar Docs</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer style="border-top: 1px solid var(--border); padding: 20px 0; text-align: center; font-size: 12px; color: var(--text-dim);">
+  <p>&copy; 2026 DataForge CLI &bull; RGS Labs™</p>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
